@@ -1,0 +1,47 @@
+<div class="col-md-11 centercontainer">
+<br>
+<h1 class="text-center">The People's House Should Not Be Used For Campaign Events!</h1>
+<p class="text-center"> Petition recipients:  Congressional Leadership </p>
+<br>
+<div class="row">
+<div class="col-md-7 shadowcontainer">
+  <p>
+  <%= image_tag "whitehouse.jpeg", width: "100%" %>
+  <p class="lead">President Trump has made a mockery of the Hatch Act.
+  Whatever we call this event, it was a disgrace.</p>
+</div>
+<!-- Box Right -->
+<div class="col-md-4 shadowcontainer">
+<p> <%= User.count %> have signed.</p>
+
+<% if current_user && current_user.confirmed_at? %>
+<h1>Thank you for you donation!</h1>
+<% end %>
+
+<% if current_user && current_user.comments.blank? %>
+<p>Please leave comment.
+Your input is very valuable in making our case.  Donations will be used
+to maintain this site and help fund our efforts to fight Bill Barr and the Department
+ of Justice from defending Donald Trump in his personal rape case.</p>
+<%= render :template => 'devise/registrations/edit'  %>
+<% end %>
+<% if current_user && current_user.comments? %>
+<h4>Thank you for leaving a comment!</h4>
+<% end %>
+</div>
+</div>
+</div>
+
+
+<!-- Comments -->
+<div class="col-md-7 offset-1">
+  <h3>Reasons for Signing This Petition:</h3>
+  <% @users.each do |user| %>
+
+  <h5><%= user.name %></h5><br>
+  <%= image_tag avatar_path(current_user, size: 60), height: 40, width: 40, class: "img-round" %>
+  <br><br>
+  <p><%= user.comments %></p>
+<hr>
+  <% end %>
+</div>

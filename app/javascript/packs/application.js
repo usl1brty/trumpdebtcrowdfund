@@ -9,6 +9,9 @@ require("@rails/activestorage").start()
 require("channels")
 require("local-time").start()
 
+window.jQuery = $;
+window.$ = $;
+
 window.Rails = Rails
 
 import 'bootstrap'

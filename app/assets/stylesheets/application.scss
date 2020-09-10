@@ -2,6 +2,44 @@
 // $light-orange: #ff8c00;
 // $navbar-default-color: $light-orange;
 
+.footer-custom {
+    background-color: #d4e3fa;
+    border: .5px solid #d4d3cf;
+    position: fixed;
+    margin-top: 60px;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+}
+
+button{
+  background-color: red !important;
+  margin: 5px !important;
+  width: 75px !important;
+}
+
+.marquee {
+  height: 35px;
+  width: 300%;
+  position: relative;
+  padding: 8px 0 4px 0;
+  border: none;
+}
+.marq{
+  background-color: #F6F9FB;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+}
+.marquee span {
+  float: left;
+  width: auto;
+}
+@keyframes marquee {
+  0% { left: 0; }
+  100% { left: -150%; }
+}
+
+
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "bootstrap";
@@ -16,7 +54,61 @@
   }
 }
 
+.navbar {
+  opacity: .98;
+  border: .5px solid #d4d3cf;
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 17px;
+  // background-color: transparent;
+}
+.navbar-custom {
+    background-color: #d4e3fa;
+
+}
+.navbar-brand {
+    font-family: Pompiere;
+
+}
+
 // Masquerade alert shouldn't have a bottom margin
-body > .alert {
+// body > .alert {
+//   margin-bottom: 0;
+// }
+.shadowcontainer {
+   width: auto;
+   // max-width: 500px;
+   height: 100%;
+   box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.5);
+   background-color: white;
+   padding: 20px;
+   margin: 20px;
+   border-radius: 6px;
+ }
+
+.homecontainer {
+  width: auto;
+  height: auto;
+  margin: 10px auto;
+  padding: 20px;
+  background: black;
+  background-color: rgba(0,0,0,0.6);
+  text-align: center;
+  color: white;
+  border-radius: 0px;
+  box-shadow: 0 0 0 1px #fff;
+}
+
+.centercontainer {
+  width: auto;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
   margin-bottom: 0;
+}
+
+body {
+  padding: 58px 0px 60px 0px;
+  background-color: #F6F9FB;
+  height: 100%;
 }

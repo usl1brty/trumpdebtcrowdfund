@@ -1,5 +1,29 @@
 Rails.application.configure do
+
+# config.stripe.secret_key = Rails.application.credentials.stripe[:development][:secret_key]
+# config.stripe.publishable_key = Rails.application.credentials.stripe[:development][:publishable_key
+
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.gmail.com',
+    port: 587,
+    # GMAIL_USERNAME: ENV["GMAIL_USERNAME"],
+    # GMAIL_PASSWORD: ENV["GMAIL_PASSWORD"],
+    username: Rails.application.credentials.email[:username],
+    password: Rails.application.credentials.email[:password],
+    # user_name: 'hatchactinfo@gmail.com',
+    # password: 'hcwmabmeokekacyd',
+    authentication: 'plain',
+    enable_starttls_auto: true
+  }
+
+# config.stripe.secret_key = Rails.application.credentials.stripe[:development][:secret_key]
+# config.stripe.publishable_key = Rails.application.credentials.stripe[:development][:publishable_key]
+
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on

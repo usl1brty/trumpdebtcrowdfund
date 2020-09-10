@@ -1,2 +1,286 @@
-<h1>Welcome to Jumpstart!</h1>
-<p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
+
+<div class="col-md-11 centercontainer">
+<br>
+<h1 class="text-center">US Department Of Justice Should Not Be Used To Defend The
+  President In His Personal Rape Defense!</h1>
+<br>
+<p class="text-center"> Petition recipients:  New York County Court and Clerk </p>
+<p class="text-center"> All money raised will go toward filing an amicus brief
+  and hiring vicous lawyers to block Bill Barr from using OUR Department of Justice
+  for Trump's personal rape defense. </p>
+<br>
+<div class="row">
+<div class="col-md-7 shadowcontainer">
+  <p>
+  <%= image_tag "jean.jpeg", width: "100%" %>
+  <p class="lead">Trump is broke and wants the US taxpayer to foot the bill for his
+    personal rape case.  This is an unprecedented abuse of power.</p>
+</div>
+<!-- Box Right -->
+<div class="col-md-4 shadowcontainer">
+  <p class="text-center"> <%= User.confirmed.count %> people have signed this petition.</p>
+  <div class="marq">
+<marquee onmouseover="this.stop();" onmouseout="this.start();">
+           <div class="marquee">
+             <% @users.confirmed.each do |user| %>
+             <a><%= user.name %></a>&nbsp&nbsp&nbsp&nbsp&nbsp
+             <% end %>
+          </div>
+ </marquee>
+</div><br>
+
+<% if current_user && current_user.confirmed_at? %>
+<h3 class="text-center">Hey <%= current_user.name %>, thank you for signing the petition!</h3>
+<p>Please leave a comment and consider making a donation.
+Your input is very valuable in making our case.  Donations will be used
+to maintain this site and help fund our efforts to fight Bill Barr and the Department
+ of Justice from defending Donald Trump in his personal rape case.</p>
+
+<p>Would you consider making a donation to support this petition?</p>
+<!-- Load Stripe.js on your website. -->
+<script src="https://js.stripe.com/v3"></script>
+
+<div class="row col-md-12">
+<button
+  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+  id="checkout-button-price_1HLxx5IwQF905tIWGTsnpjBa"
+  role="link"
+  type="button"
+>
+  $3
+</button>
+
+<div id="error-message"></div>
+<button
+  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+  id="checkout-button-price_1HLxx5IwQF905tIW7PYAJhoX"
+  role="link"
+  type="button"
+>
+  $5
+</button>
+<div id="error-message"></div>
+
+<button
+    style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+    id="checkout-button-price_1HLxx5IwQF905tIWiL7VXj04"
+    role="link"
+    type="button"
+  >
+    $10
+  </button>
+  <div id="error-message"></div>
+
+
+<button
+  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+  id="checkout-button-price_1HLxx5IwQF905tIWgitKjq2i"
+  role="link"
+  type="button"
+>
+  $20
+</button>
+
+
+<button
+  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
+  id="checkout-button-price_1HLxx5IwQF905tIWshGwr9Al"
+  role="link"
+  type="button"
+>
+  $100
+</button>
+
+<div id="error-message"></div>
+
+</div>
+
+
+
+<% else %>
+<%= render :template => 'devise/registrations/new'  %>
+<% end %>
+
+<% if current_user && current_user.comments.blank? %>
+<%= render :template => 'devise/registrations/edit'  %>
+<% else %>
+<% if current_user && current_user.confirmed_at.blank? %>
+  <%= render :template => 'devise/registrations/new'  %>
+<% end %>
+<% end %>
+<% if current_user && current_user.comments? %>
+<br><h4>Thank you for leaving a comment!</h4>
+<% end %>
+</div>
+</div>
+</div>
+
+
+<!-- Comments -->
+<div class="col-md-7 offset-1">
+  <h3>Reasons for Signing This Petition:</h3>
+  <% @users.withcomments.each do |user| %>
+
+  <h5><%= user.name %></h5><br>
+  <%= image_tag avatar_path(current_user, size: 60), height: 40, width: 40, class: "img-round" %>
+  <br><br>
+  <p><%= user.comments %></p>
+<hr>
+  <% end %>
+</div>
+
+
+<script>
+(function() {
+  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
+
+  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWGTsnpjBa');
+  checkoutButton.addEventListener('click', function () {
+    // When the customer clicks on the button, redirect
+    // them to Checkout.
+    stripe.redirectToCheckout({
+      lineItems: [{price: 'price_1HLxx5IwQF905tIWGTsnpjBa', quantity: 1}],
+      mode: 'payment',
+      // Do not rely on the redirect to the successUrl for fulfilling
+      // purchases, customers may not always reach the success_url after
+      // a successful payment.
+      // Instead use one of the strategies described in
+      // https://stripe.com/docs/payments/checkout/fulfillment
+      successUrl: 'http://localhost:3000/paymentthankyou',
+      cancelUrl: 'http://localhost:3000/paymentcanceled',
+    })
+    .then(function (result) {
+      if (result.error) {
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer.
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+})();
+</script>
+
+<script>
+(function() {
+  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
+
+  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIW7PYAJhoX');
+  checkoutButton.addEventListener('click', function () {
+    // When the customer clicks on the button, redirect
+    // them to Checkout.
+    stripe.redirectToCheckout({
+      lineItems: [{price: 'price_1HLxx5IwQF905tIW7PYAJhoX', quantity: 1}],
+      mode: 'payment',
+      // Do not rely on the redirect to the successUrl for fulfilling
+      // purchases, customers may not always reach the success_url after
+      // a successful payment.
+      // Instead use one of the strategies described in
+      // https://stripe.com/docs/payments/checkout/fulfillment
+      successUrl: window.location.protocol + '//localhost:3000/paymentthankyou',
+      cancelUrl: window.location.protocol + '//localhost:3000/paymentcanceled',
+    })
+    .then(function (result) {
+      if (result.error) {
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer.
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+})();
+</script>
+
+<script>
+(function() {
+  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
+
+  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWiL7VXj04');
+  checkoutButton.addEventListener('click', function () {
+    // When the customer clicks on the button, redirect
+    // them to Checkout.
+    stripe.redirectToCheckout({
+      lineItems: [{price: 'price_1HLxx5IwQF905tIWiL7VXj04', quantity: 1}],
+      mode: 'payment',
+      // Do not rely on the redirect to the successUrl for fulfilling
+      // purchases, customers may not always reach the success_url after
+      // a successful payment.
+      // Instead use one of the strategies described in
+      // https://stripe.com/docs/payments/checkout/fulfillment
+      successUrl: 'http://localhost:3000/paymentthankyou',
+      cancelUrl: 'http://localhost:3000/paymentcanceled',
+    })
+    .then(function (result) {
+      if (result.error) {
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer.
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+})();
+</script>
+
+<script>
+(function() {
+  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
+
+  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWgitKjq2i');
+  checkoutButton.addEventListener('click', function () {
+    // When the customer clicks on the button, redirect
+    // them to Checkout.
+    stripe.redirectToCheckout({
+      lineItems: [{price: 'price_1HLxx5IwQF905tIWgitKjq2i', quantity: 1}],
+      mode: 'payment',
+      // Do not rely on the redirect to the successUrl for fulfilling
+      // purchases, customers may not always reach the success_url after
+      // a successful payment.
+      // Instead use one of the strategies described in
+      // https://stripe.com/docs/payments/checkout/fulfillment
+      successUrl: 'http://localhost:3000/paymentthankyou',
+      cancelUrl: 'http://localhost:3000/paymentcanceled',
+    })
+    .then(function (result) {
+      if (result.error) {
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer.
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+})();
+</script>
+
+<script>
+(function() {
+  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
+
+  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWshGwr9Al');
+  checkoutButton.addEventListener('click', function () {
+    // When the customer clicks on the button, redirect
+    // them to Checkout.
+    stripe.redirectToCheckout({
+      lineItems: [{price: 'price_1HLxx5IwQF905tIWshGwr9Al', quantity: 1}],
+      mode: 'payment',
+      // Do not rely on the redirect to the successUrl for fulfilling
+      // purchases, customers may not always reach the success_url after
+      // a successful payment.
+      // Instead use one of the strategies described in
+      // https://stripe.com/docs/payments/checkout/fulfillment
+      successUrl: 'http://localhost:3000/paymentthankyou',
+      cancelUrl: 'http://localhost:3000/paymentcanceled',
+    })
+    .then(function (result) {
+      if (result.error) {
+        // If `redirectToCheckout` fails due to a browser or network
+        // error, display the localized error message to your customer.
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+})();
+</script>
