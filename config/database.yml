@@ -4,8 +4,8 @@ development:
  encoding: unicode
  database: barrpetition_development
  pool: 5
- username: <%= Rails.application.credentials.postgres[:username] %>
- password: <%= Rails.application.credentials.postgres[:password] %>
+ username:
+ password:
 
 
 test:
@@ -13,15 +13,13 @@ test:
  encoding: unicode
  database: barrpetition_test
  pool: 5
- username: <%= Rails.application.credentials.postgres[:username] %>
- password: <%= Rails.application.credentials.postgres[:password] %>
+ username:
+ password:
 
 production:
  adapter: postgresql
  encoding: unicode
  pool: 5
-   <% if Rails.application.secrets[:database].present? %>
  database: barrpetition_production
  username: <%= Rails.application.credentials.postgres[:username] %>
  password: <%= Rails.application.credentials.postgres[:password] %>
-<% end %>
