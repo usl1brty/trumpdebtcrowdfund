@@ -1,17 +1,30 @@
 Rails.application.configure do
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port: 587,
-    authentication: 'plain',
-    user_name: 'hatchactinfo@gmail.com',
-    password: 'John10232006?',
-    enable_starttls_auto: true
-  }
+  ActionMailer::Base.smtp_settings = {
+     :address => 'smtp.sendgrid.net',
+     :port => '587',
+     :authentication => :plain,
+     :user_name => Rails.application.credentials.sendgrid(:username),
+     :password => Rails.application.credentials.sendgrid(:api_key),
+     :domain => 'heroku.com',
+     :enable_starttls_auto => true
+   }
+
+   config.action_mailer.delivery_method = :smtp
+   config.action_mailer.default_url_options ={:host => 'http://localhost:3000'}
+
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.raise_delivery_errors = true
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   address: 'smtp.gmail.com',
+  #   port: 587,
+  #   authentication: 'plain',
+  #   user_name: '<%= Rails.application.credentials.gmail[:username] %>',
+  #   password: '<%= Rails.application.credentials.gmail[:password] %>',
+  #   enable_starttls_auto: true
+  # }
 
 # config.stripe.secret_key = Rails.application.credentials.stripe[:production][:secret_key]
 # config.stripe.publishable_key = Rails.application.credentials.stripe[:production][:publishable_key]

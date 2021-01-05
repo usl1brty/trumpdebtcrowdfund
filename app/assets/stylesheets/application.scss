@@ -1,21 +1,90 @@
 // $navbar-default-bg: #312312;
 // $light-orange: #ff8c00;
 // $navbar-default-color: $light-orange;
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow&family=Encode+Sans+Condensed:wght@100&display=swap');
+
+
+
+body, html {
+    // margin:100;
+    // padding:0;
+    height: 100%;
+    // position:relative;
+}
+
+/* The hero image */
+.hero-image {
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+  url('/assets/reps.jpg');
+
+  /* Set a specific height */
+  height: 60%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* Place text in the middle of the image */
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.showpic {
+    margin-bottom: -220px;
+    margin-top: -180px;
+    margin-right: -35px;
+    margin-left: -65px;
+    border:4px solid white;
+    border-radius: 100px;
+    max-width: 140px;
+    max-height: 140px;
+}
+
+.roundavatar {
+    border:4px solid white;
+    border-radius: 100px;
+}
 
 .footer-custom {
-    background-color: #d4e3fa;
-    border: .5px solid #d4d3cf;
-    position: fixed;
-    margin-top: 60px;
+    background-color: #0101DF;
     bottom: 0px;
     left: 0;
     right: 0;
+    height: 60px;
+    padding: 15px;
+}
+
+.footer a {
+  color: white;
+}
+
+.footer a:hover {
+  background-color: white;
+}
+
+.footer span {
+  color: white;
 }
 
 button{
   background-color: red !important;
-  margin: 5px !important;
-  width: 75px !important;
+  margin: 4px !important;
+  width: 50px !important;
+  background-color:#6772E5;
+  color:#FFF;
+  padding: 6px 10px;
+  border:0;
+  border-radius:2px;
+  font-size:.8em;
 }
 
 .marquee {
@@ -43,7 +112,7 @@ button{
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "bootstrap";
-@import "jumpstart/sticky-footer";
+// @import "jumpstart/sticky-footer";
 @import "jumpstart/announcements";
 
 // Fixes bootstrap nav-brand container overlap
@@ -52,37 +121,50 @@ button{
     margin-left: 0;
     margin-right: 0;
   }
+  body, html {
+    padding: 49px 0px 160px 0px;
+  }
+  .hero-image {
+    height: 80%;
+  }
 }
 
 .navbar {
-  opacity: .98;
-  border: .5px solid #d4d3cf;
+  opacity: .90;
+  // border: .5px solid #d4d3cf;
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 17px;
   // background-color: transparent;
 }
 .navbar-custom {
-    background-color: #d4e3fa;
-
+    background-color: #0101DF;
 }
 .navbar-brand {
-    font-family: Pompiere;
+  font-family: 'Open Sans Condensed', sans-serif;
+  color: white !important;
+}
+.navbar-custom a {
+  color: white !important;
+}
 
+.navbar-custom a:hover {
+  background-color: black;
+  color: white; // Any color for text
 }
 
 // Masquerade alert shouldn't have a bottom margin
-// body > .alert {
-//   margin-bottom: 0;
-// }
+body > .alert {
+  margin-bottom: 0;
+}
 .shadowcontainer {
    width: auto;
    // max-width: 500px;
-   height: 100%;
+   height: auto;
    box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.5);
    background-color: white;
    padding: 20px;
    margin: 20px;
-   border-radius: 6px;
+   border-radius: 3px;
  }
 
 .homecontainer {
@@ -108,7 +190,8 @@ button{
 }
 
 body {
-  padding: 58px 0px 60px 0px;
+  padding: 55px 0px 60px 0px;
   background-color: #F6F9FB;
   height: 100%;
+  font-family: 'Archivo Narrow', sans-serif;
 }

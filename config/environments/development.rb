@@ -1,20 +1,17 @@
 Rails.application.configure do
 
-# config.stripe.secret_key = Rails.application.credentials.stripe[:development][:secret_key]
-# config.stripe.publishable_key = Rails.application.credentials.stripe[:development][:publishable_key
+ActionMailer::Base.smtp_settings = {
+   :address => 'smtp.sendgrid.net',
+   :port => '587',
+   :authentication => :plain,
+   :user_name => Rails.application.credentials.sendgrid[:username],
+   :password => Rails.application.credentials.sendgrid[:api_key],
+   :domain => 'http://localhost:3000',
+   :enable_starttls_auto => true
+ }
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port: 587,
-    user_name: '<%= Rails.application.credentials.email[:username] %>',
-    password: '<%= Rails.application.credentials.email[:password] %>',
-    authentication: 'plain',
-    enable_starttls_auto: true
-  }
+ config.action_mailer.delivery_method = :smtp
+ config.action_mailer.default_url_options ={:host => 'http://localhost:3000'}
 
 # config.stripe.secret_key = Rails.application.credentials.stripe[:development][:secret_key]
 # config.stripe.publishable_key = Rails.application.credentials.stripe[:development][:publishable_key]
@@ -53,7 +50,7 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  # config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false
 

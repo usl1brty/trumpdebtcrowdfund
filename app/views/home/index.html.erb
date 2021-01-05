@@ -1,21 +1,73 @@
+<div class="hero-image">
+  <div class="col-md-12 hero-text">
+    <% if current_user && current_user.confirmed_at? %>
+    <h1>Thank you for signing <%= current_user.name %>!</h1><br>
+    <p>Would you consider making a donation to support this petition?</p>
+    <p>All money raised will go toward hiring the most viscous
+    and talented lawyers and lobbyists to prevent treasonist republicans from
+    holding office. </p>
+    <button
+      id="checkout-button-price_1HLxx5IwQF905tIWGTsnpjBa"
+      role="link"
+      type="button"
+    >
+      $3
+    </button>
+    <button
+      id="checkout-button-price_1HLxx5IwQF905tIW7PYAJhoX"
+      role="link"
+      type="button"
+    >
+      $5
+    </button>
+    <button
+        id="checkout-button-price_1HLxx5IwQF905tIWiL7VXj04"
+        role="link"
+        type="button"
+      >
+        $10
+      </button>
+    <button
+      id="checkout-button-price_1HLxx5IwQF905tIWgitKjq2i"
+      role="link"
+      type="button"
+    >
+      $20
+    </button>
+    <button
+      id="checkout-button-price_1HLxx5IwQF905tIWshGwr9Al"
+      role="link"
+      type="button"
+    >
+      $100
+    </button>
+
+    <% else %>
+    <h1>Do not seat the traitorous 126!</h1><br>
+    <h4>Please sign to support Rep. Pascrell's request asking Nancy
+      Pelosi to <h4>refrain from seating members who are objecting to the free
+      and fair election of 2020! </h4>
+    <% end %>
+    <br>
+    <p class="text-center"> The power of MAGA is that they show up and they're
+      really loud.  Let's show them resistors can be loud and proud as well.
+
+  </div>
+</div>
+
 
 <div class="col-md-11 centercontainer">
-<br>
-<h1 class="text-center">US Department Of Justice Should Not Be Used To Defend The
-  President In His Personal Rape Defense!</h1>
-<br>
-<p class="text-center"> Petition recipients:  New York County Court and Clerk </p>
-<p class="text-center"> All money raised will go toward filing an amicus brief
-  and hiring vicous lawyers to block Bill Barr from using OUR Department of Justice
-  for Trump's personal rape defense. </p>
-<br>
 <div class="row">
-<div class="col-md-7 shadowcontainer">
-  <p>
-  <%= image_tag "jean.jpeg", width: "100%" %>
-  <p class="lead">Trump is broke and wants the US taxpayer to foot the bill for his
-    personal rape case.  This is an unprecedented abuse of power.</p>
+<div class="col-md-7">
+<br>
+  <div class="col-md-2 animated jackInTheBox">
+  <p align="left"><%= image_tag "pascrell_avatar.jpg", class: "showpic" %>
 </div>
+
+  <%= image_tag "pascrell_statement.jpeg", width: "100%" %>
+
+</div>
+
 <!-- Box Right -->
 <div class="col-md-4 shadowcontainer">
   <p class="text-center"> <%= User.confirmed.count %> people have signed this petition.</p>
@@ -30,72 +82,25 @@
 </div><br>
 
 <% if current_user && current_user.confirmed_at? %>
-<h3 class="text-center">Hey <%= current_user.name %>, thank you for signing the petition!</h3>
+
+<h3 class="text-center">Hey <%= current_user.name %>, thank you!</h3>
+
+<% if current_user && current_user.comments? %>
+<br><h4>Thank you for leaving a comment!</h4>
+
+<% else %>
+
 <p>Please leave a comment and consider making a donation.
 Your input is very valuable in making our case.  Donations will be used
-to maintain this site and help fund our efforts to fight Bill Barr and the Department
- of Justice from defending Donald Trump in his personal rape case.</p>
+to maintain this site and help fund our efforts to rid the US Congress
+of the treasonous 126.</p>
 
-<p>Would you consider making a donation to support this petition?</p>
-<!-- Load Stripe.js on your website. -->
-<script src="https://js.stripe.com/v3"></script>
+<% end %>
 
-<div class="row col-md-12">
-<button
-  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
-  id="checkout-button-price_1HLxx5IwQF905tIWGTsnpjBa"
-  role="link"
-  type="button"
->
-  $3
-</button>
-
-<div id="error-message"></div>
-<button
-  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
-  id="checkout-button-price_1HLxx5IwQF905tIW7PYAJhoX"
-  role="link"
-  type="button"
->
-  $5
-</button>
-<div id="error-message"></div>
-
-<button
-    style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
-    id="checkout-button-price_1HLxx5IwQF905tIWiL7VXj04"
-    role="link"
-    type="button"
-  >
-    $10
-  </button>
-  <div id="error-message"></div>
-
-
-<button
-  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
-  id="checkout-button-price_1HLxx5IwQF905tIWgitKjq2i"
-  role="link"
-  type="button"
->
-  $20
-</button>
-
-
-<button
-  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
-  id="checkout-button-price_1HLxx5IwQF905tIWshGwr9Al"
-  role="link"
-  type="button"
->
-  $100
-</button>
-
-<div id="error-message"></div>
-
-</div>
-
-
+<br>
+<p>Petition signed as <strong><%= current_user.email %></strong>.
+<%= link_to "Not you?", destroy_user_session_path,
+method: :delete, :class => 'navbar-link'  %></p>
 
 <% else %>
 <%= render :template => 'devise/registrations/new'  %>
@@ -108,26 +113,31 @@ to maintain this site and help fund our efforts to fight Bill Barr and the Depar
   <%= render :template => 'devise/registrations/new'  %>
 <% end %>
 <% end %>
-<% if current_user && current_user.comments? %>
-<br><h4>Thank you for leaving a comment!</h4>
-<% end %>
-</div>
-</div>
-</div>
 
+</div>
+</div>
+</div></div>
 
 <!-- Comments -->
-<div class="col-md-7 offset-1">
+<br>
+<div class="col-md-11 centercontainer">
+<!-- Comments -->
+<br>
+<div class="col-md-12"><br>
   <h3>Reasons for Signing This Petition:</h3>
+  <br>
   <% @users.withcomments.each do |user| %>
 
-  <h5><%= user.name %></h5><br>
-  <%= image_tag avatar_path(current_user, size: 60), height: 40, width: 40, class: "img-round" %>
+  <%= image_tag avatar_path(user), height: 70, width: 70, class: "roundavatar" %>&nbsp&nbsp
+  <%= user.name %>
   <br><br>
   <p><%= user.comments %></p>
 <hr>
   <% end %>
 </div>
+<br><br>
+</div>
+
 
 
 <script>
