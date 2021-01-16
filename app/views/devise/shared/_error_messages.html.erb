@@ -9,7 +9,8 @@
     <ul>
       <% resource.errors.full_messages.each do |message| %>
         <li><%= message %></li>
-      <% end %>
+        <%= link_to "Click to use different email", destroy_user_session_path,
+        method: :delete, :class => 'navbar-link'  %></p>      <% end %>
     </ul>
   </div>
 <% end %>

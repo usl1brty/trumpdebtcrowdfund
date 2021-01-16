@@ -1,79 +1,55 @@
+<% if current_user %>
+
 <div class="hero-image">
   <div class="hero-text">
-    <h2>Thank you for your support <%= current_user.name %>!
-    <h2>Do not seat the traitorous 126!</h2><br>
+    <h4>Thank you for your support <%= current_user.first_name %>!</h4>
+    <p>The people of this country are about to torment the Trumps
+      the best way possible:  through their money!</p>
+    <p>We'll email you when we're ready to complete pledges.</p>
 
-    <br>
-    <p class="text-center"> Petition recipient:  Nancy Pelosi </p>
+    <a href="http://twitter.com/share?text=Torment%20Trump,%20join%20me%20#trumpdebt%20&url=http:localhost:3000">
+      <i class="fab fa-twitter"> #trumpdebtcollectors</i></a>
+<br><br>
+
+    <h5 class="text-center"> <%= @users.pledged.pledged.count %> people have pledged
+      <%= number_to_currency(@users.pledged.sum(&:pledge)) %> so far.</h5>
+    <div class="hero-marq">
+  <marquee onmouseover="this.stop();" onmouseout="this.start();">
+             <div class="marquee">
+               <% @users.pledged.each do |user| %>
+               <a><%= user.first_name %></a>&nbsp
+               <a>$<%= user.pledge %></a>&nbsp&nbsp&nbsp&nbsp&nbsp
+              <% end %>
+            </div>
+   </marquee>
   </div>
-</div>
 
+   <p>Email verified as <strong><%= current_user.email %></strong>.
+   <%= link_to "Not you or use a different email?", destroy_user_session_path,
+   method: :delete, :class => 'navbar-link'  %></p>
 
-<div class="row">
-  <div class="col-md-6 offset-1">
-  <br>
-    <div class="col-md-2 animated jackInTheBox">
-    <p align="left"><%= image_tag "pascrell_avatar.jpg", class: "showpic" %>
-  </div>
-
-    <%= image_tag "pascrell_statement.jpeg", width: "100%" %>
-    <p class="lead"></p>
-  </div>
-
-
-<% if current_user && current_user.confirmed_at? %>
-
-<div class="col-md-4 shadowcontainer">
-  <p class="text-center"> <%= User.confirmed.count %> people have signed this petition.</p>
-  <div class="marq">
-<marquee onmouseover="this.stop();" onmouseout="this.start();">
-           <div class="marquee">
-             <% @users.confirmed.each do |user| %>
-             <a><%= user.name %></a>&nbsp&nbsp&nbsp&nbsp&nbsp
-             <% end %>
-          </div>
- </marquee>
-</div><br>
-
-
-<h3 class="text-center">Hey <%= current_user.name %>, thank you for your donation!</h3>
-<p class="text-center">Donations will be used
-to maintain this site and help fund our efforts to unseat the Republican traitors.
-</p>
-
-<% if current_user && current_user.comments? %>
-<br><h4>And thank you for leaving a comment!</h4>
-
-<% else %>
-
-<p>Please leave a comment.
-Your input is very valuable in making our case.</p>
-
-<% end %>
-
-<br>
-<p>Petition signed as <strong><%= current_user.email %></strong>.
-<%= link_to "Not you?", destroy_user_session_path,
-method: :delete, :class => 'navbar-link'  %></p>
-
-<% end %>
-
-<% if current_user && current_user.comments.blank? %>
-<%= render :template => 'devise/registrations/edit'  %>
-<% end %>
 
 </div></div>
+
 
 <div class="col-md-11 centercontainer">
 <!-- Comments -->
 <br>
 <div class="col-md-12"><br>
-  <h3>Reasons for Signing This Petition:</h3>
+  <% if current_user && current_user.comments.blank? %>
+  <p>Please leave a comment and consider making a donation.
+  Your input is very important to me.  Donations will be used
+  to maintain this site and for hosting on Heroku. The more
+  interest we get, the more it cost.</p>
+  <%= render :template => 'devise/registrations/edit'  %>
+  <% end %>
+
+  <h3>Reasons for Pledging:</h3>
   <br>
   <% @users.withcomments.each do |user| %>
 
   <%= image_tag avatar_path(user), height: 70, width: 70, class: "roundavatar" %>&nbsp&nbsp
-  <%= user.name %>
+  <%= user.first_name %>
   <br><br>
   <p><%= user.comments %></p>
 <hr>
@@ -81,3 +57,9 @@ method: :delete, :class => 'navbar-link'  %></p>
 </div>
 <br><br>
 </div>
+
+<% else %>
+
+Please find us at the home page.
+
+<% end %>

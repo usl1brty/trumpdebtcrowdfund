@@ -17,7 +17,8 @@ Rails.application.routes.draw do
       mount Sidekiq::Web => '/sidekiq'
     end
 
-  devise_for :users, controllers: {confirmations: 'users/confirmations'}
+  # devise_for :users, controllers: {confirmations: 'users/confirmations'}
+  devise_for :users, controllers: { registrations: 'users/registrations', confirmations: 'users/confirmations' }
 
   resources :notifications, only: [:index]
   resources :announcements, only: [:index]

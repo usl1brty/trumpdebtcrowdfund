@@ -1,8 +1,14 @@
+
+
 <div class="row">
   <div class="col-md-12 ml-auto mr-auto">
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
+
+      <p>We need to be sure everyone pledging is real, so fill in the form and you will be
+        sent an email with a link to verify you're a real person.  Please click the link in that email
+        and you will be redirected to this site where you can then choose the amount to pledge.</p>
 
       <div class="form-group">
         <%= f.text_field :name, autofocus: true, class: 'form-control', :required => true, placeholder: "First and Last Name" %>
@@ -12,19 +18,15 @@
         <%= f.email_field :email, autofocus: false, class: 'form-control', placeholder: "Email Address" %>
       </div>
 
-      <div class="field">
-        <%= f.hidden_field :password, :value => '004696' %>
-     </div>
+
 
       <div class="form-group">
-        <%= f.submit "Click to Sign and Authenticate Email", class: "btn btn-primary
+        <%= f.submit "Click to Authenticate and Check Your Email", class: "btn btn-primary
         btn-block btn-sm" %>
       </div>
+      <%= render 'shared/notices' %>
 
-      <p>We will never share your email with anyone or any company ever.
-        An email will be sent asking for you to confirm.  Click the link and your signature
-        on this petition will be recorded.  You'll then be redirected back to our site where
-        you may leave a comment about why this issue is important to you.</p>
+      <p>We will never share your email.</p>
 
     <% end %>
 

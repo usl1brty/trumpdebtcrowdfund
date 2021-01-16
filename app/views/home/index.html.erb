@@ -1,89 +1,190 @@
 <div class="hero-image">
   <div class="col-md-12 hero-text">
-    <% if current_user && current_user.confirmed_at? %>
-    <h1>Thank you for signing <%= current_user.name %>!</h1><br>
-    <p>Would you consider making a donation to support this petition?</p>
-    <p>All money raised will go toward hiring the most viscous
-    and talented lawyers and lobbyists to prevent treasonist republicans from
-    holding office. </p>
-    <button
-      id="checkout-button-price_1HLxx5IwQF905tIWGTsnpjBa"
-      role="link"
-      type="button"
-    >
-      $3
-    </button>
-    <button
-      id="checkout-button-price_1HLxx5IwQF905tIW7PYAJhoX"
-      role="link"
-      type="button"
-    >
-      $5
-    </button>
-    <button
-        id="checkout-button-price_1HLxx5IwQF905tIWiL7VXj04"
-        role="link"
-        type="button"
-      >
-        $10
-      </button>
-    <button
-      id="checkout-button-price_1HLxx5IwQF905tIWgitKjq2i"
-      role="link"
-      type="button"
-    >
-      $20
-    </button>
-    <button
-      id="checkout-button-price_1HLxx5IwQF905tIWgitKjq2i"
-      role="link"
-      type="button"
-    >
-      $100
-    </button>
+
+    <% if current_user && current_user.pledge? %>
+    <h2>Thank you for your $<%= current_user.pledge %> pledge <%= current_user.first_name %>!</h2>
+
+        <p>Would you consider making a donation to support this website?  All money raised will go to maintaining the site and hosting on Heroku. </p>
+        <button
+          id="checkout-button-price_1HLxx5IwQF905tIWGTsnpjBa"
+          role="link"
+          type="button"
+        >
+          $3
+        </button>
+        <button
+          id="checkout-button-price_1HLxx5IwQF905tIW7PYAJhoX"
+          role="link"
+          type="button"
+        >
+          $5
+        </button>
+        <button
+            id="checkout-button-price_1HLxx5IwQF905tIWiL7VXj04"
+            role="link"
+            type="button"
+          >
+            $10
+          </button>
+        <button
+          id="checkout-button-price_1HLxx5IwQF905tIWgitKjq2i"
+          role="link"
+          type="button"
+        >
+          $20
+        </button>
+        <button
+        id="checkout-button-price_1HLxx5IwQF905tIWshGwr9Al"
+          role="link"
+          type="button"
+        >
+          $100
+        </button>
+<br><br>
+        <h5 class="text-center"> <%= @users.pledged.count %> people have pledged
+          <%= number_to_currency(@users.pledged.sum(&:pledge)) %> so far.</h5>
+        <div class="hero-marq">
+      <marquee onmouseover="this.stop();" onmouseout="this.start();">
+                 <div class="marquee">
+                   <% @users.pledged.each do |user| %>
+                   <a><%= user.first_name %></a>&nbsp
+                   <a>$<%= user.pledge %></a>&nbsp&nbsp&nbsp&nbsp&nbsp
+                  <% end %>
+                </div>
+       </marquee>
+      </div>
+
 
     <% else %>
-    <h1>Do not seat the traitorous 126!</h1><br>
-    <h4>Please sign to support Rep. Pascrell's request asking Nancy
-      Pelosi to <h4>refrain from seating members who are objecting to the free
-      and fair election of 2020! </h4>
-    <% end %>
-    <br>
-    <p class="text-center"> The power of MAGA is that they show up and they're
-      really loud.  Let's show them resistors can be loud and proud as well.
+
+    <% if current_user && current_user.confirmed_at? %>
+    <h2>Thank you for verifying your email <%= current_user.first_name %>!</h2>
+    <h2>How much would you like to pledge?</h2>
+<br>
+
+<%= render :template => 'devise/registrations/pledge'  %>
+
+    <% else %>
+
+    <h1>Do you want a legal way to torment Trump?<h1>
+      Pledge now to own a part of Trump debt!</h1><br>
+
+    <h2>We want to buy Trump debt from Deutsche Bank <h2> so we can legitimately torment
+        the criminal Trump family  for years to come!</h2><br>
+
+        <a href="http://twitter.com/share?text=Torment%20Trump,%20join%20me%20#trumpdebt%20&url=http:localhost:3000">
+          <i class="fab fa-twitter"> #trumpdebtcollectors</i></a>
+
+  <% end %>
+
+  <% end %>
 
   </div>
 </div>
 
-
 <div class="col-md-11 centercontainer">
 <div class="row">
-<div class="col-md-7">
-<br>
-  <div class="col-md-2 animated jackInTheBox">
-  <p align="left"><%= image_tag "pascrell_avatar.jpg", class: "showpic" %>
+<div class="col-md-8">
+<div class="shadowcontainer">
+<h4 class="text-center">In addition to squeezing the Trump family and taking advantage
+  of every legal option avialable to us, another goal could be to eventually take over
+  one of the properties like this hotel in Washington, DC and we can turn it into a 2021
+  Insurrection Memorial. </h4>
+<hr>
+<div class="row">
+<div class="col-sm-12">
+  <p>This is only a pledge to commit.  If we get to a critical amount pledged
+  I will send  you an email asking you to confirm your pledge.
+</div>
+<div class="col-sm-6">
+  <p> If you do complete
+  that pledge, it's not a donation, you will become part owner of the debt and whetever property
+  we foreclose!  We will hire the meanest, most rabid dog of a lawyer to, within the limits
+  of the law, harrass and torment the Trump family.
+</div>
+<div class="col-sm-6">
+    <p> Please consider making a pledge.  The Deutsche debt is estimated
+    at $340 million.  Sounds like a lot, but 81 million patriots voted against the criminal,
+    so we can get there with less than five bucks each!
+</div>
+</div>
+<hr>
+<div class="row">
+<div class="col-sm-4">
+<h4> I came up with this idea, posted it to Twitter, and here are a few of the responses.
 </div>
 
-  <%= image_tag "pascrell_statement.jpeg", width: "100%" %>
-
+<div class="col-sm-8">
+<div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner" style="width:100%; height: 100px !important;">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="/assets/tweet1.png" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="/assets/tweet2.png" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="/assets/tweet3.png" alt="Third slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="/assets/tweet4.png" alt="Fourth slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="/assets/tweet5.png" alt="Fourth slide">
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 <!-- Box Right -->
-<div class="col-md-4 shadowcontainer">
-  <p class="text-center"> <%= User.confirmed.count %> people have signed this petition.</p>
+<div class="col-md-4">
+<div class="shadowcontainer">
+  <p class="text-center"> <%= @users.pledged.pledged.count %> people have pledged
+    <%= number_to_currency(@users.pledged.sum(&:pledge)) %> so far.</p>
   <div class="marq">
 <marquee onmouseover="this.stop();" onmouseout="this.start();">
            <div class="marquee">
-             <% @users.confirmed.each do |user| %>
-             <a><%= user.name %></a>&nbsp&nbsp&nbsp&nbsp&nbsp
+             <% @users.pledged.each do |user| %>
+             <a><%= user.first_name %></a>&nbsp
+             <a>$<%= user.pledge %></a>&nbsp&nbsp&nbsp&nbsp&nbsp
              <% end %>
           </div>
  </marquee>
-</div><br>
+</div>
+<br>
+
+<% if current_user && current_user.pledge.blank? %>
+<h3 class="text-center">Hey <%= current_user.first_name %>, thank you for verifying
+  your email! Please fill in your pledge amount for partial ownership
+  in the Trump debt.</h3>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= devise_error_messages! %>
+
+  <!-- <div class="row"> -->
+    <div class="form-group">
+      <%= f.text_field :pledge, autofocus: false, class: 'form-control', placeholder:
+      "Pledge amount here." %>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div class="alert alert-warning">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+
+    <div class="form-group">
+      <%= f.submit "Submit Pledge", class: 'btn btn-sm btn-block btn-primary' %>
+    </div>
+  <% end %>
+
+<% else %>
 
 <% if current_user && current_user.confirmed_at? %>
 
-<h3 class="text-center">Hey <%= current_user.name %>, thank you!</h3>
+<h3 class="text-center">Hey <%= current_user.first_name %>, thank you for verifying
+  your email!</h3>
 
 <% if current_user && current_user.comments? %>
 <br><h4>Thank you for leaving a comment!</h4>
@@ -91,54 +192,59 @@
 <% else %>
 
 <p>Please leave a comment and consider making a donation.
-Your input is very valuable in making our case.  Donations will be used
-to maintain this site and help fund our efforts to rid the US Congress
-of the treasonous 126.</p>
+Your input is very valuable.  Donations will be used
+to maintain this site, which is badly needed since higher traffic means higher costs.</p>
 
 <% end %>
 
 <br>
-<p>Petition signed as <strong><%= current_user.email %></strong>.
-<%= link_to "Not you?", destroy_user_session_path,
+<p>Email verified as <strong><%= current_user.email %></strong>.
+<%= link_to "Not you or use a different email?", destroy_user_session_path,
 method: :delete, :class => 'navbar-link'  %></p>
 
 <% else %>
 <%= render :template => 'devise/registrations/new'  %>
 <% end %>
 
-<% if current_user && current_user.comments.blank? %>
+<% if current_user && current_user.pledge? && current_user.comments.blank? %>
 <%= render :template => 'devise/registrations/edit'  %>
 <% else %>
 <% if current_user && current_user.confirmed_at.blank? %>
   <%= render :template => 'devise/registrations/new'  %>
 <% end %>
 <% end %>
-
+<% end %>
 </div>
 </div>
-</div></div>
+</div>
+
+
 
 <!-- Comments -->
+
 <br>
-<div class="col-md-11 centercontainer">
-<!-- Comments -->
-<br>
-<div class="col-md-12"><br>
-  <h3>Reasons for Signing This Petition:</h3>
+<div class="col-md-7">
+  <h3>Comments from Pledgers:</h3>
   <br>
   <% @users.withcomments.each do |user| %>
 
   <%= image_tag avatar_path(user), height: 70, width: 70, class: "roundavatar" %>&nbsp&nbsp
-  <%= user.name %>
+  <%= user.first_name %>
   <br><br>
   <p><%= user.comments %></p>
 <hr>
   <% end %>
-</div>
 <br><br>
 </div>
+<br><br>
+<div class="col-md-7">
+<%= link_to "Report: Deutsche Bank ‘Eager’ To Dump $340 Million In Loans To Trump Businesses After Election, Forbes", "https://www.forbes.com/sites/jonathanponciano/2020/11/03/deutsche-bank-eager-to-dump-340-million-in-loans-to-trump-businesses-after-election/?sh=791d8aef23c0", target: "_blank" %>
+</div>
+
+</div>
 
 
+<script src="https://js.stripe.com/v3"></script>
 
 <script>
 (function() {
@@ -146,23 +252,29 @@ method: :delete, :class => 'navbar-link'  %></p>
 
   var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWGTsnpjBa');
   checkoutButton.addEventListener('click', function () {
-    // When the customer clicks on the button, redirect
-    // them to Checkout.
+    /*
+     * When the customer clicks on the button, redirect
+     * them to Checkout.
+     */
     stripe.redirectToCheckout({
       lineItems: [{price: 'price_1HLxx5IwQF905tIWGTsnpjBa', quantity: 1}],
       mode: 'payment',
-      // Do not rely on the redirect to the successUrl for fulfilling
-      // purchases, customers may not always reach the success_url after
-      // a successful payment.
-      // Instead use one of the strategies described in
-      // https://stripe.com/docs/payments/checkout/fulfillment
+      /*
+       * Do not rely on the redirect to the successUrl for fulfilling
+       * purchases, customers may not always reach the success_url after
+       * a successful payment.
+       * Instead use one of the strategies described in
+       * https://stripe.com/docs/payments/checkout/fulfill-orders
+       */
       successUrl: 'http://localhost:3000/paymentthankyou',
       cancelUrl: 'http://localhost:3000/paymentcanceled',
     })
     .then(function (result) {
       if (result.error) {
-        // If `redirectToCheckout` fails due to a browser or network
-        // error, display the localized error message to your customer.
+        /*
+         * If `redirectToCheckout` fails due to a browser or network
+         * error, display the localized error message to your customer.
+         */
         var displayError = document.getElementById('error-message');
         displayError.textContent = result.error.message;
       }
@@ -170,6 +282,7 @@ method: :delete, :class => 'navbar-link'  %></p>
   });
 })();
 </script>
+
 
 <script>
 (function() {
@@ -177,23 +290,29 @@ method: :delete, :class => 'navbar-link'  %></p>
 
   var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIW7PYAJhoX');
   checkoutButton.addEventListener('click', function () {
-    // When the customer clicks on the button, redirect
-    // them to Checkout.
+    /*
+     * When the customer clicks on the button, redirect
+     * them to Checkout.
+     */
     stripe.redirectToCheckout({
       lineItems: [{price: 'price_1HLxx5IwQF905tIW7PYAJhoX', quantity: 1}],
       mode: 'payment',
-      // Do not rely on the redirect to the successUrl for fulfilling
-      // purchases, customers may not always reach the success_url after
-      // a successful payment.
-      // Instead use one of the strategies described in
-      // https://stripe.com/docs/payments/checkout/fulfillment
-      successUrl: window.location.protocol + '//localhost:3000/paymentthankyou',
-      cancelUrl: window.location.protocol + '//localhost:3000/paymentcanceled',
+      /*
+       * Do not rely on the redirect to the successUrl for fulfilling
+       * purchases, customers may not always reach the success_url after
+       * a successful payment.
+       * Instead use one of the strategies described in
+       * https://stripe.com/docs/payments/checkout/fulfill-orders
+       */
+      successUrl: 'http://localhost:3000/paymentthankyou',
+      cancelUrl: 'http://localhost:3000/paymentcanceled',
     })
     .then(function (result) {
       if (result.error) {
-        // If `redirectToCheckout` fails due to a browser or network
-        // error, display the localized error message to your customer.
+        /*
+         * If `redirectToCheckout` fails due to a browser or network
+         * error, display the localized error message to your customer.
+         */
         var displayError = document.getElementById('error-message');
         displayError.textContent = result.error.message;
       }
@@ -201,6 +320,7 @@ method: :delete, :class => 'navbar-link'  %></p>
   });
 })();
 </script>
+
 
 <script>
 (function() {
@@ -208,23 +328,29 @@ method: :delete, :class => 'navbar-link'  %></p>
 
   var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWiL7VXj04');
   checkoutButton.addEventListener('click', function () {
-    // When the customer clicks on the button, redirect
-    // them to Checkout.
+    /*
+     * When the customer clicks on the button, redirect
+     * them to Checkout.
+     */
     stripe.redirectToCheckout({
       lineItems: [{price: 'price_1HLxx5IwQF905tIWiL7VXj04', quantity: 1}],
       mode: 'payment',
-      // Do not rely on the redirect to the successUrl for fulfilling
-      // purchases, customers may not always reach the success_url after
-      // a successful payment.
-      // Instead use one of the strategies described in
-      // https://stripe.com/docs/payments/checkout/fulfillment
+      /*
+       * Do not rely on the redirect to the successUrl for fulfilling
+       * purchases, customers may not always reach the success_url after
+       * a successful payment.
+       * Instead use one of the strategies described in
+       * https://stripe.com/docs/payments/checkout/fulfill-orders
+       */
       successUrl: 'http://localhost:3000/paymentthankyou',
       cancelUrl: 'http://localhost:3000/paymentcanceled',
     })
     .then(function (result) {
       if (result.error) {
-        // If `redirectToCheckout` fails due to a browser or network
-        // error, display the localized error message to your customer.
+        /*
+         * If `redirectToCheckout` fails due to a browser or network
+         * error, display the localized error message to your customer.
+         */
         var displayError = document.getElementById('error-message');
         displayError.textContent = result.error.message;
       }
@@ -232,83 +358,6 @@ method: :delete, :class => 'navbar-link'  %></p>
   });
 })();
 </script>
-
-<script>
-(function() {
-  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
-
-  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWgitKjq2i');
-  checkoutButton.addEventListener('click', function () {
-    // When the customer clicks on the button, redirect
-    // them to Checkout.
-    stripe.redirectToCheckout({
-      lineItems: [{price: 'price_1HLxx5IwQF905tIWgitKjq2i', quantity: 1}],
-      mode: 'payment',
-      // Do not rely on the redirect to the successUrl for fulfilling
-      // purchases, customers may not always reach the success_url after
-      // a successful payment.
-      // Instead use one of the strategies described in
-      // https://stripe.com/docs/payments/checkout/fulfillment
-      successUrl: 'http://localhost:3000/paymentthankyou',
-      cancelUrl: 'http://localhost:3000/paymentcanceled',
-    })
-    .then(function (result) {
-      if (result.error) {
-        // If `redirectToCheckout` fails due to a browser or network
-        // error, display the localized error message to your customer.
-        var displayError = document.getElementById('error-message');
-        displayError.textContent = result.error.message;
-      }
-    });
-  });
-})();
-</script>
-
-<script>
-(function() {
-  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
-
-  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWshGwr9Al');
-  checkoutButton.addEventListener('click', function () {
-    // When the customer clicks on the button, redirect
-    // them to Checkout.
-    stripe.redirectToCheckout({
-      lineItems: [{price: 'price_1HLxx5IwQF905tIWshGwr9Al', quantity: 1}],
-      mode: 'payment',
-      // Do not rely on the redirect to the successUrl for fulfilling
-      // purchases, customers may not always reach the success_url after
-      // a successful payment.
-      // Instead use one of the strategies described in
-      // https://stripe.com/docs/payments/checkout/fulfillment
-      successUrl: 'http://localhost:3000/paymentthankyou',
-      cancelUrl: 'http://localhost:3000/paymentcanceled',
-    })
-    .then(function (result) {
-      if (result.error) {
-        // If `redirectToCheckout` fails due to a browser or network
-        // error, display the localized error message to your customer.
-        var displayError = document.getElementById('error-message');
-        displayError.textContent = result.error.message;
-      }
-    });
-  });
-})();
-</script>
-
-<!-- Load Stripe.js on your website. -->
-<script src="https://js.stripe.com/v3"></script>
-
-<!-- Create a button that your customers click to complete their purchase. Customize the styling to suit your branding. -->
-<button
-  style="background-color:#6772E5;color:#FFF;padding:8px 12px;border:0;border-radius:4px;font-size:1em"
-  id="checkout-button-price_1HLxx5IwQF905tIWgitKjq2i"
-  role="link"
-  type="button"
->
-  Checkout
-</button>
-
-<div id="error-message"></div>
 
 <script>
 (function() {
@@ -330,8 +379,45 @@ method: :delete, :class => 'navbar-link'  %></p>
        * Instead use one of the strategies described in
        * https://stripe.com/docs/payments/checkout/fulfill-orders
        */
-       successUrl: 'http://localhost:3000/paymentthankyou',
-       cancelUrl: 'http://localhost:3000/paymentcanceled',
+      successUrl: 'http://localhost:3000/paymentthankyou',
+      cancelUrl: 'http://localhost:3000/paymentcanceled',
+    })
+    .then(function (result) {
+      if (result.error) {
+        /*
+         * If `redirectToCheckout` fails due to a browser or network
+         * error, display the localized error message to your customer.
+         */
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+})();
+</script>
+
+<script>
+(function() {
+  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
+
+  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWshGwr9Al');
+  checkoutButton.addEventListener('click', function () {
+    /*
+     * When the customer clicks on the button, redirect
+     * them to Checkout.
+     */
+    stripe.redirectToCheckout({
+      lineItems: [{price: 'price_1HLxx5IwQF905tIWshGwr9Al', quantity: 1}],
+      mode: 'payment',
+      /*
+       * Do not rely on the redirect to the successUrl for fulfilling
+       * purchases, customers may not always reach the success_url after
+       * a successful payment.
+       * Instead use one of the strategies described in
+       * https://stripe.com/docs/payments/checkout/fulfill-orders
+       */
+      successUrl: 'http://localhost:3000/paymentthankyou',
+      cancelUrl: 'http://localhost:3000/paymentcanceled',
     })
     .then(function (result) {
       if (result.error) {

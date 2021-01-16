@@ -1,14 +1,12 @@
-<div class="row">
-  <div class="col-md-12 ml-auto mr-auto">
+  <div class="col-md-2 ml-auto mr-auto">
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
       <%= devise_error_messages! %>
 
-
-
+    <!-- <div class="row"> -->
       <div class="form-group">
-        <%= f.text_area :comments, autofocus: false, class: 'form-control', placeholder:
-        "Leave your comment here." %>
+        <%= f.text_field :pledge, autofocus: false, class: 'form-control', placeholder:
+        "Pledge amount here." %>
       </div>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -17,8 +15,8 @@
 
 
       <div class="form-group">
-        <%= f.submit "Submit Comment", class: 'btn btn-sm btn-block btn-primary' %>
+        <%= f.submit "Submit Pledge", class: 'btn btn-sm btn-block btn-primary' %>
       </div>
     <% end %>
-  </div>
+  <!-- </div> -->
 </div>

@@ -1,17 +1,18 @@
 <% if user_masquerade? %>
   <div class="alert alert-warning text-center">
-    You're logged in as <b><%= current_user.name %> (<%= current_user.email %>)</b>
+    You're logged in as <b><%= current_user.first_name %> (<%= current_user.email %>)</b>
     <%= link_to back_masquerade_path(current_user) do %><%= icon("fas", "times") %> Logout <% end %>
   </div>
 <% end %>
 
 <nav class="navbar navbar-expand-md navbar-light navbar-custom fixed-top">
-    <%= link_to "OutsidetheDCbeltway.com", root_path, class: "navbar-brand" %>
+    <%= link_to "TrumpDebtCollectors.com", root_path, class: "navbar-brand" %>
     <div class="container">
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler" type="navbutton" data-toggle="collapse" data-target="#navbarMain"
+      aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
-    </button>
+    </span>
 
     <div class="collapse navbar-collapse" id="navbarMain">
       <ul class="navbar-nav mr-auto mt-2 mt-md-0">

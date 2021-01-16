@@ -2,7 +2,7 @@
 development:
  adapter: postgresql
  encoding: unicode
- database: barrpetition_development
+ database: trumpdebt_development
  pool: 5
  username: <%= Rails.application.credentials.postgres[:username] %>
  password: <%= Rails.application.credentials.postgres[:password] %>
@@ -11,7 +11,7 @@ development:
 test:
  adapter: postgresql
  encoding: unicode
- database: barrpetition_test
+ database: trumpdebt_test
  pool: 5
  username: <%= Rails.application.credentials.postgres[:username] %>
  password: <%= Rails.application.credentials.postgres[:password] %>
@@ -20,6 +20,6 @@ production:
  adapter: postgresql
  encoding: unicode
  pool: 5
- database: barrpetition_production
+ database: trumpdebt_production
  username: <%= Rails.application.credentials.postgres[:username] %>
  password: <%= Rails.application.credentials.postgres[:password] %>

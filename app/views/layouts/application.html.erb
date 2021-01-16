@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
+
     <%= render 'shared/head' %>
+
 </head>
 
   <body>
     <%= render 'shared/navbar' %>
-    <%= render 'shared/notices' %>
 
+    <div class="notification global-notification">
+    <%= render 'shared/notices' %>
+    </div>
 
       <%= yield %>
 

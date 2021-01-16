@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("local-time").start()
 
+
 window.jQuery = $;
 window.$ = $;
 
@@ -21,3 +22,12 @@ $(document).on("turbolinks:load", () => {
   $('[data-toggle="tooltip"]').tooltip()
   $('[data-toggle="popover"]').popover()
 })
+
+document.addEventListener("turbolinks:load", function() {
+  var notification = document.querySelector('.global-notification');
+  if(notification) {
+    window.setTimeout(function() {
+      notification.style.display = "none";
+    }, 3000);
+  }
+});

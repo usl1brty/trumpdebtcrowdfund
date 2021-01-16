@@ -38,10 +38,10 @@ to maintain this site and help fund our efforts to fight Bill Barr and the Depar
 
 <!-- Comments -->
 <div class="col-md-7 offset-1">
-  <h3>Reasons for Signing This Petition:</h3>
+  <h3>Reasons for Pledging:</h3>
   <% @users.each do |user| %>
 
-  <h5><%= user.name %></h5><br>
+  <h5><%= user.first_name %></h5><br>
   <%= image_tag avatar_path(current_user, size: 60), height: 40, width: 40, class: "img-round" %>
   <br><br>
   <p><%= user.comments %></p>
