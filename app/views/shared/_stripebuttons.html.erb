@@ -1,0 +1,226 @@
+<button
+  id="checkout-button-price_1HLxx5IwQF905tIWGTsnpjBa"
+  role="link"
+  type="button"
+>
+  $3
+</button>
+<button
+  id="checkout-button-price_1HLxx5IwQF905tIW7PYAJhoX"
+  role="link"
+  type="button"
+>
+  $5
+</button>
+<button
+    id="checkout-button-price_1HLxx5IwQF905tIWiL7VXj04"
+    role="link"
+    type="button"
+  >
+    $10
+  </button>
+<button
+  id="checkout-button-price_1HLxx5IwQF905tIWgitKjq2i"
+  role="link"
+  type="button"
+>
+  $20
+</button>
+<button
+id="checkout-button-price_1HLxx5IwQF905tIWshGwr9Al"
+  role="link"
+  type="button"
+>
+  $100
+</button>
+
+
+
+<script src="https://js.stripe.com/v3"></script>
+
+<script>
+(function() {
+  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
+
+  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWGTsnpjBa');
+  checkoutButton.addEventListener('click', function () {
+    /*
+     * When the customer clicks on the button, redirect
+     * them to Checkout.
+     */
+    stripe.redirectToCheckout({
+      lineItems: [{price: 'price_1HLxx5IwQF905tIWGTsnpjBa', quantity: 1}],
+      mode: 'payment',
+      /*
+       * Do not rely on the redirect to the successUrl for fulfilling
+       * purchases, customers may not always reach the success_url after
+       * a successful payment.
+       * Instead use one of the strategies described in
+       * https://stripe.com/docs/payments/checkout/fulfill-orders
+       */
+      successUrl: 'http://localhost:3000/paymentthankyou',
+      cancelUrl: 'http://localhost:3000/paymentcanceled',
+    })
+    .then(function (result) {
+      if (result.error) {
+        /*
+         * If `redirectToCheckout` fails due to a browser or network
+         * error, display the localized error message to your customer.
+         */
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+})();
+</script>
+
+
+<script>
+(function() {
+  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
+
+  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIW7PYAJhoX');
+  checkoutButton.addEventListener('click', function () {
+    /*
+     * When the customer clicks on the button, redirect
+     * them to Checkout.
+     */
+    stripe.redirectToCheckout({
+      lineItems: [{price: 'price_1HLxx5IwQF905tIW7PYAJhoX', quantity: 1}],
+      mode: 'payment',
+      /*
+       * Do not rely on the redirect to the successUrl for fulfilling
+       * purchases, customers may not always reach the success_url after
+       * a successful payment.
+       * Instead use one of the strategies described in
+       * https://stripe.com/docs/payments/checkout/fulfill-orders
+       */
+      successUrl: 'http://localhost:3000/paymentthankyou',
+      cancelUrl: 'http://localhost:3000/paymentcanceled',
+    })
+    .then(function (result) {
+      if (result.error) {
+        /*
+         * If `redirectToCheckout` fails due to a browser or network
+         * error, display the localized error message to your customer.
+         */
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+})();
+</script>
+
+
+<script>
+(function() {
+  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
+
+  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWiL7VXj04');
+  checkoutButton.addEventListener('click', function () {
+    /*
+     * When the customer clicks on the button, redirect
+     * them to Checkout.
+     */
+    stripe.redirectToCheckout({
+      lineItems: [{price: 'price_1HLxx5IwQF905tIWiL7VXj04', quantity: 1}],
+      mode: 'payment',
+      /*
+       * Do not rely on the redirect to the successUrl for fulfilling
+       * purchases, customers may not always reach the success_url after
+       * a successful payment.
+       * Instead use one of the strategies described in
+       * https://stripe.com/docs/payments/checkout/fulfill-orders
+       */
+      successUrl: 'http://localhost:3000/paymentthankyou',
+      cancelUrl: 'http://localhost:3000/paymentcanceled',
+    })
+    .then(function (result) {
+      if (result.error) {
+        /*
+         * If `redirectToCheckout` fails due to a browser or network
+         * error, display the localized error message to your customer.
+         */
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+})();
+</script>
+
+<script>
+(function() {
+  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
+
+  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWgitKjq2i');
+  checkoutButton.addEventListener('click', function () {
+    /*
+     * When the customer clicks on the button, redirect
+     * them to Checkout.
+     */
+    stripe.redirectToCheckout({
+      lineItems: [{price: 'price_1HLxx5IwQF905tIWgitKjq2i', quantity: 1}],
+      mode: 'payment',
+      /*
+       * Do not rely on the redirect to the successUrl for fulfilling
+       * purchases, customers may not always reach the success_url after
+       * a successful payment.
+       * Instead use one of the strategies described in
+       * https://stripe.com/docs/payments/checkout/fulfill-orders
+       */
+      successUrl: 'http://localhost:3000/paymentthankyou',
+      cancelUrl: 'http://localhost:3000/paymentcanceled',
+    })
+    .then(function (result) {
+      if (result.error) {
+        /*
+         * If `redirectToCheckout` fails due to a browser or network
+         * error, display the localized error message to your customer.
+         */
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+})();
+</script>
+
+<script>
+(function() {
+  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
+
+  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWshGwr9Al');
+  checkoutButton.addEventListener('click', function () {
+    /*
+     * When the customer clicks on the button, redirect
+     * them to Checkout.
+     */
+    stripe.redirectToCheckout({
+      lineItems: [{price: 'price_1HLxx5IwQF905tIWshGwr9Al', quantity: 1}],
+      mode: 'payment',
+      /*
+       * Do not rely on the redirect to the successUrl for fulfilling
+       * purchases, customers may not always reach the success_url after
+       * a successful payment.
+       * Instead use one of the strategies described in
+       * https://stripe.com/docs/payments/checkout/fulfill-orders
+       */
+      successUrl: 'http://localhost:3000/paymentthankyou',
+      cancelUrl: 'http://localhost:3000/paymentcanceled',
+    })
+    .then(function (result) {
+      if (result.error) {
+        /*
+         * If `redirectToCheckout` fails due to a browser or network
+         * error, display the localized error message to your customer.
+         */
+        var displayError = document.getElementById('error-message');
+        displayError.textContent = result.error.message;
+      }
+    });
+  });
+})();
+</script>

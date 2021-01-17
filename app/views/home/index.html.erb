@@ -1,45 +1,15 @@
 <div class="hero-image">
   <div class="col-md-12 hero-text">
 
+
     <% if current_user && current_user.pledge? %>
     <h2>Thank you for your $<%= current_user.pledge %> pledge <%= current_user.first_name %>!</h2>
 
         <p>Would you consider making a donation to support this website?  All money raised will go to maintaining the site and hosting on Heroku. </p>
-        <button
-          id="checkout-button-price_1HLxx5IwQF905tIWGTsnpjBa"
-          role="link"
-          type="button"
-        >
-          $3
-        </button>
-        <button
-          id="checkout-button-price_1HLxx5IwQF905tIW7PYAJhoX"
-          role="link"
-          type="button"
-        >
-          $5
-        </button>
-        <button
-            id="checkout-button-price_1HLxx5IwQF905tIWiL7VXj04"
-            role="link"
-            type="button"
-          >
-            $10
-          </button>
-        <button
-          id="checkout-button-price_1HLxx5IwQF905tIWgitKjq2i"
-          role="link"
-          type="button"
-        >
-          $20
-        </button>
-        <button
-        id="checkout-button-price_1HLxx5IwQF905tIWshGwr9Al"
-          role="link"
-          type="button"
-        >
-          $100
-        </button>
+
+        <%= render 'shared/stripebuttons' %>
+
+
 <br><br>
         <h5 class="text-center"> <%= @users.pledged.count %> people have pledged
           <%= number_to_currency(@users.pledged.sum(&:pledge)) %> so far.</h5>
@@ -72,14 +42,20 @@
     <h2>We want to buy Trump debt from Deutsche Bank <h2> so we can legitimately torment
         the criminal Trump family for years to come!</h2><br>
 
-        <a href="http://twitter.com/share?text=Torment%20Trump,%20join%20me%20#trumpdebt%20&url=http:localhost:3000">
-          <i class="fab fa-twitter"> #trumpdebtcollectors</i></a>
+
 
   <% end %>
 
   <% end %>
+
+  <a href="http://twitter.com/share?text=Torment%20Trump,%20join%20me%20#trumpdebt%20&url=http:localhost:3000">
+    <i class="fab fa-twitter"> #trumpdebtcrowdfund</i></a>
 
   </div>
+</div>
+
+<div class="col-md-2 animated jackInTheBox">
+<p align="left"><%= image_tag "trump.jpeg", class: "showpic" %>
 </div>
 
 <div class="col-md-11 centercontainer">
@@ -242,193 +218,3 @@ method: :delete, :class => 'navbar-link'  %></p>
 </div>
 
 </div>
-
-
-<script src="https://js.stripe.com/v3"></script>
-
-<script>
-(function() {
-  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
-
-  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWGTsnpjBa');
-  checkoutButton.addEventListener('click', function () {
-    /*
-     * When the customer clicks on the button, redirect
-     * them to Checkout.
-     */
-    stripe.redirectToCheckout({
-      lineItems: [{price: 'price_1HLxx5IwQF905tIWGTsnpjBa', quantity: 1}],
-      mode: 'payment',
-      /*
-       * Do not rely on the redirect to the successUrl for fulfilling
-       * purchases, customers may not always reach the success_url after
-       * a successful payment.
-       * Instead use one of the strategies described in
-       * https://stripe.com/docs/payments/checkout/fulfill-orders
-       */
-      successUrl: 'http://localhost:3000/paymentthankyou',
-      cancelUrl: 'http://localhost:3000/paymentcanceled',
-    })
-    .then(function (result) {
-      if (result.error) {
-        /*
-         * If `redirectToCheckout` fails due to a browser or network
-         * error, display the localized error message to your customer.
-         */
-        var displayError = document.getElementById('error-message');
-        displayError.textContent = result.error.message;
-      }
-    });
-  });
-})();
-</script>
-
-
-<script>
-(function() {
-  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
-
-  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIW7PYAJhoX');
-  checkoutButton.addEventListener('click', function () {
-    /*
-     * When the customer clicks on the button, redirect
-     * them to Checkout.
-     */
-    stripe.redirectToCheckout({
-      lineItems: [{price: 'price_1HLxx5IwQF905tIW7PYAJhoX', quantity: 1}],
-      mode: 'payment',
-      /*
-       * Do not rely on the redirect to the successUrl for fulfilling
-       * purchases, customers may not always reach the success_url after
-       * a successful payment.
-       * Instead use one of the strategies described in
-       * https://stripe.com/docs/payments/checkout/fulfill-orders
-       */
-      successUrl: 'http://localhost:3000/paymentthankyou',
-      cancelUrl: 'http://localhost:3000/paymentcanceled',
-    })
-    .then(function (result) {
-      if (result.error) {
-        /*
-         * If `redirectToCheckout` fails due to a browser or network
-         * error, display the localized error message to your customer.
-         */
-        var displayError = document.getElementById('error-message');
-        displayError.textContent = result.error.message;
-      }
-    });
-  });
-})();
-</script>
-
-
-<script>
-(function() {
-  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
-
-  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWiL7VXj04');
-  checkoutButton.addEventListener('click', function () {
-    /*
-     * When the customer clicks on the button, redirect
-     * them to Checkout.
-     */
-    stripe.redirectToCheckout({
-      lineItems: [{price: 'price_1HLxx5IwQF905tIWiL7VXj04', quantity: 1}],
-      mode: 'payment',
-      /*
-       * Do not rely on the redirect to the successUrl for fulfilling
-       * purchases, customers may not always reach the success_url after
-       * a successful payment.
-       * Instead use one of the strategies described in
-       * https://stripe.com/docs/payments/checkout/fulfill-orders
-       */
-      successUrl: 'http://localhost:3000/paymentthankyou',
-      cancelUrl: 'http://localhost:3000/paymentcanceled',
-    })
-    .then(function (result) {
-      if (result.error) {
-        /*
-         * If `redirectToCheckout` fails due to a browser or network
-         * error, display the localized error message to your customer.
-         */
-        var displayError = document.getElementById('error-message');
-        displayError.textContent = result.error.message;
-      }
-    });
-  });
-})();
-</script>
-
-<script>
-(function() {
-  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
-
-  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWgitKjq2i');
-  checkoutButton.addEventListener('click', function () {
-    /*
-     * When the customer clicks on the button, redirect
-     * them to Checkout.
-     */
-    stripe.redirectToCheckout({
-      lineItems: [{price: 'price_1HLxx5IwQF905tIWgitKjq2i', quantity: 1}],
-      mode: 'payment',
-      /*
-       * Do not rely on the redirect to the successUrl for fulfilling
-       * purchases, customers may not always reach the success_url after
-       * a successful payment.
-       * Instead use one of the strategies described in
-       * https://stripe.com/docs/payments/checkout/fulfill-orders
-       */
-      successUrl: 'http://localhost:3000/paymentthankyou',
-      cancelUrl: 'http://localhost:3000/paymentcanceled',
-    })
-    .then(function (result) {
-      if (result.error) {
-        /*
-         * If `redirectToCheckout` fails due to a browser or network
-         * error, display the localized error message to your customer.
-         */
-        var displayError = document.getElementById('error-message');
-        displayError.textContent = result.error.message;
-      }
-    });
-  });
-})();
-</script>
-
-<script>
-(function() {
-  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
-
-  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWshGwr9Al');
-  checkoutButton.addEventListener('click', function () {
-    /*
-     * When the customer clicks on the button, redirect
-     * them to Checkout.
-     */
-    stripe.redirectToCheckout({
-      lineItems: [{price: 'price_1HLxx5IwQF905tIWshGwr9Al', quantity: 1}],
-      mode: 'payment',
-      /*
-       * Do not rely on the redirect to the successUrl for fulfilling
-       * purchases, customers may not always reach the success_url after
-       * a successful payment.
-       * Instead use one of the strategies described in
-       * https://stripe.com/docs/payments/checkout/fulfill-orders
-       */
-      successUrl: 'http://localhost:3000/paymentthankyou',
-      cancelUrl: 'http://localhost:3000/paymentcanceled',
-    })
-    .then(function (result) {
-      if (result.error) {
-        /*
-         * If `redirectToCheckout` fails due to a browser or network
-         * error, display the localized error message to your customer.
-         */
-        var displayError = document.getElementById('error-message');
-        displayError.textContent = result.error.message;
-      }
-    });
-  });
-})();
-</script>
