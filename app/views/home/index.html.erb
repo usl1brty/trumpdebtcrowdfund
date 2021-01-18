@@ -24,6 +24,9 @@
        </marquee>
       </div>
 
+      <p>Email verified as <strong><%= current_user.email %></strong>.
+      <%= link_to "Not you or use a different email?", destroy_user_session_path,
+      method: :delete, :class => 'navbar-link'  %></p>
 
     <% else %>
 
@@ -54,7 +57,7 @@
   </div>
 </div>
 
-<div class="col-md-2 animated jackInTheBox">
+<div class="col-md-2">
 <p align="left"><%= image_tag "trump.jpeg", class: "showpic" %>
 </div>
 
@@ -124,6 +127,7 @@
 <marquee onmouseover="this.stop();" onmouseout="this.start();">
            <div class="marquee">
              <% @users.pledged.each do |user| %>
+             <%= image_tag avatar_path(user), height: 30, width: 30, class: "marqueeavatar" %>&nbsp
              <a><%= user.first_name %></a>&nbsp
              <a>$<%= user.pledge %></a>&nbsp&nbsp&nbsp&nbsp&nbsp
              <% end %>

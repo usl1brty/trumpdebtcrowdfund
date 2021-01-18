@@ -17,6 +17,7 @@
   <marquee onmouseover="this.stop();" onmouseout="this.start();">
              <div class="marquee">
                <% @users.pledged.each do |user| %>
+               <%= image_tag avatar_path(user), height: 30, width: 30, class: "marqueeavatar" %>&nbsp
                <a><%= user.first_name %></a>&nbsp
                <a>$<%= user.pledge %></a>&nbsp&nbsp&nbsp&nbsp&nbsp
               <% end %>
@@ -37,8 +38,7 @@
 <br>
 <div class="col-md-12"><br>
   <% if current_user && current_user.comments.blank? %>
-  <p>Please leave a comment and consider making a donation.
-  Your input is very important to me.  Donations will be used
+  <p>Please leave a comment.  Donations will be used
   to maintain this site and for hosting on Heroku. The more
   interest we get, the more it cost.</p>
   <%= render :template => 'devise/registrations/edit'  %>

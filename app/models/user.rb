@@ -1,5 +1,8 @@
 class User < ApplicationRecord
 
+  validates :comments, length: { maximum: 240 }, allow_blank: true
+
+
   def password_required?
     false
   end
