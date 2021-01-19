@@ -1,10 +1,11 @@
 <button
-  id="checkout-button-price_1HLxx5IwQF905tIWGTsnpjBa"
+  id="checkout-button-price_1HMGWZIwQF905tIWtf8fF1ps"
   role="link"
   type="button"
 >
   $3
 </button>
+
 <button
   id="checkout-button-price_1HLxx5IwQF905tIW7PYAJhoX"
   role="link"
@@ -12,6 +13,7 @@
 >
   $5
 </button>
+
 <button
     id="checkout-button-price_1HLxx5IwQF905tIWiL7VXj04"
     role="link"
@@ -19,6 +21,7 @@
   >
     $10
   </button>
+
 <button
   id="checkout-button-price_1HLxx5IwQF905tIWgitKjq2i"
   role="link"
@@ -26,6 +29,7 @@
 >
   $20
 </button>
+
 <button
 id="checkout-button-price_1HLxx5IwQF905tIWshGwr9Al"
   role="link"
@@ -40,16 +44,16 @@ id="checkout-button-price_1HLxx5IwQF905tIWshGwr9Al"
 
 <script>
 (function() {
-  var stripe = Stripe('pk_test_51HLjsHIwQF905tIWtkotx81j9NnIldBZQoEcdHJphRIKu6sNhQSaA3cGqC52lSgIIGofetGotliZB5yCrLDlxRc700tRJIS6RT');
+  var stripe = Stripe('pk_live_51HLjsHIwQF905tIWrmG9JBl1uJ3JHKZ1QdkReG79yelxSZHBq5bRnEsNgwissasiYbzEg21VR3y3sF4lyNenSdUk00U0dZUiV1');
 
-  var checkoutButton = document.getElementById('checkout-button-price_1HLxx5IwQF905tIWGTsnpjBa');
+  var checkoutButton = document.getElementById('checkout-button-price_1HMGWZIwQF905tIWtf8fF1ps');
   checkoutButton.addEventListener('click', function () {
     /*
      * When the customer clicks on the button, redirect
      * them to Checkout.
      */
     stripe.redirectToCheckout({
-      lineItems: [{price: 'price_1HLxx5IwQF905tIWGTsnpjBa', quantity: 1}],
+      lineItems: [{price: 'price_1HMGWZIwQF905tIWtf8fF1ps', quantity: 1}],
       mode: 'payment',
       /*
        * Do not rely on the redirect to the successUrl for fulfilling
@@ -58,8 +62,8 @@ id="checkout-button-price_1HLxx5IwQF905tIWshGwr9Al"
        * Instead use one of the strategies described in
        * https://stripe.com/docs/payments/checkout/fulfill-orders
        */
-      successUrl: 'http://localhost:3000/paymentthankyou',
-      cancelUrl: 'http://localhost:3000/paymentcanceled',
+      successUrl: 'https://twitter.com/Outofbeltway/success',
+      cancelUrl: 'https://twitter.com/Outofbeltway/canceled',
     })
     .then(function (result) {
       if (result.error) {
@@ -74,6 +78,8 @@ id="checkout-button-price_1HLxx5IwQF905tIWshGwr9Al"
   });
 })();
 </script>
+
+
 
 
 <script>
