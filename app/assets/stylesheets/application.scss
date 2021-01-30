@@ -3,7 +3,13 @@
 // $navbar-default-color: $light-orange;
 @import url('https://fonts.googleapis.com/css2?family=Archivo+Narrow&family=Encode+Sans+Condensed:wght@100&display=swap');
 
-
+.fit-image {
+  width: 350px;
+  max-height: 100%;
+  float: left;
+  margin-bottom: 5px;
+  margin-right: 18px;
+}
 
 body, html {
     // margin:100;
@@ -16,11 +22,11 @@ body, html {
 .hero-image {
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-  url('/assets/hotel2.jpeg');
+  url('https://trumpdebt.s3.ca-central-1.amazonaws.com/trumpfamily.jpeg');
   /* Set a specific height */
-  height: 70%;
+  height: 100%;
   /* Position and center the image to scale nicely on all screens */
-  background-position: center;
+  background-position: relative;
   background-repeat: no-repeat;
   background-size: cover;
   // position: relative;
@@ -86,6 +92,7 @@ body, html {
     right: 0;
     height: 60px;
     padding: 15px;
+    margin-top: 20px;
 }
 
 .footer a {
@@ -112,6 +119,17 @@ button{
   font-size:.8em;
 }
 
+.button{
+  background-color: red !important;
+  margin: 4px !important;
+  width: 50px !important;
+  background-color:#6772E5;
+  color:#FFF;
+  padding: 6px 10px;
+  border:0;
+  border-radius:2px;
+  font-size:.8em;
+}
 
 .marquee {
   height: 35px;
@@ -155,6 +173,12 @@ button{
     width: 100vw;
     background-size: cover;
   }
+  .fit-image {
+    width: 270px;
+    max-height: 100%;
+    margin-bottom: 18px;
+    margin-right: 18px;
+  }
 }
 
 
@@ -163,6 +187,8 @@ button{
   // border: .5px solid #d4d3cf;
   font-family: 'Open Sans Condensed', sans-serif;
   font-size: 17px;
+  margin-bottom: 90px;
+  margin-top: 0;
   // background-color: transparent;
 }
 .navbar-custom {
@@ -177,8 +203,8 @@ button{
 }
 
 .navbar-custom a:hover {
-  background-color: black;
-  color: white; // Any color for text
+  // background-color: white;
+  color: black !important; // Any color for text
 }
 
 // Masquerade alert shouldn't have a bottom margin
@@ -188,7 +214,7 @@ body > .alert {
 .shadowcontainer {
    width: auto;
    // max-width: 500px;
-   min-height: 485px;
+   min-height: 690px;
    max-height: auto;
    box-shadow: 0px 2px 18px 0px rgba(0,0,0,0.5);
    background-color: white;
@@ -222,6 +248,7 @@ body > .alert {
 body {
   padding: 55px 0px 60px 0px;
   background-color: #F6F9FB;
-  height: 100%;
+  height: 100vh;
   font-family: 'Archivo Narrow', sans-serif;
+  // margin-bottom: 60px;
 }

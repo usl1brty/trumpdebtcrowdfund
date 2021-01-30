@@ -1,28 +1,37 @@
+
 <div class="hero-image">
   <div class="col-md-12 hero-text">
 
 
     <% if current_user && current_user.pledge? %>
     <h2>Thank you for your $<%= current_user.pledge %> pledge <%= current_user.first_name %>!</h2>
+    <% if current_user && current_user.comments? %>
+    <h2>Thank you for leaving a comment <%= current_user.first_name %>!</h2>
+    <% else %>
+    <h2>Please leave comment below.</h2>
+    <% end %>
 
         <p>Would you consider making a donation to support this website?  All money raised will go to maintaining the site and hosting on Heroku. </p>
+<%= render 'shared/buttons' %>
+<p class="text-center"><%= number_to_currency(@charges.sum(:amount)) %> in generous donations so far.</p>
 
-        <%= render 'shared/stripebuttons' %>
 
-
-<br><br>
-        <h5 class="text-center"> <%= @users.pledged.count %> people have pledged
-          <%= number_to_currency(@users.pledged.sum(&:pledge)) %> so far.</h5>
-        <div class="hero-marq">
+<br>
+        <h5 class="text-center"> <%= User.pledged.count %> people have pledged
+          <%= number_to_currency(User.pledged.sum(&:pledge)) %> so far.</h5>
+      <div class="d-flex justify-content-center">
+        <div class="col-md-3">
+      <div class="hero-marq">
       <marquee onmouseover="this.stop();" onmouseout="this.start();">
                  <div class="marquee">
-                   <% @users.pledged.each do |user| %>
+                   <% User.pledged.each do |user| %>
                    <a><%= user.first_name %></a>&nbsp
                    <a>$<%= user.pledge %></a>&nbsp&nbsp&nbsp&nbsp&nbsp
                   <% end %>
                 </div>
        </marquee>
       </div>
+    </div></div>
 
       <p>Email verified as <strong><%= current_user.email %></strong>.
       <%= link_to "Not you or use a different email?", destroy_user_session_path,
@@ -34,61 +43,151 @@
     <h2>Thank you for verifying your email <%= current_user.first_name %>!</h2>
     <h2>How much would you like to pledge?</h2>
 <br>
-
 <%= render :template => 'devise/registrations/pledge'  %>
-
     <% else %>
-
-    <h1>Do you want a legal way to torment Trump?<h1>
-      Pledge now to own a part of Trump debt!</h1><br>
-
-    <h2>I want to crowdfund a purchase of Trump debt from Deutsche Bank <h2> for a way to legitimately torment
-        the criminal Trump family for years and take over a Trump property!</h2><br>
-
-
-
+    <h1>Join me in beating Trump at his own game,<h1>
+      pledge now to own a part of Trump debt!</h1><br>
+    <h4>I want to crowdfund a purchase of Trump debt from Deutsche Bank <h4> for a way to legitimately torment
+        the criminal Trump family for years and take over a Trump property!</h4><br>
+  <% end %>
   <% end %>
 
-  <% end %>
-
-  <a href="http://twitter.com/share?text=Torment%20Trump,%20join%20me%20#trumpdebt%20&url=http:localhost:3000">
+  <a href="http://twitter.com/share?text=Torment%20Trump,%20join%20me%20#trumpdebt%20&url=trumpdebtcrowdfund.com">
     <i class="fab fa-twitter"> #trumpdebtcrowdfund</i></a>
 
   </div>
 </div>
 
 <div class="col-md-2">
-<p align="left"><%= image_tag "trump.jpeg", class: "showpic" %>
+<p align="left"><%= image_tag "https://trumpdebt.s3.ca-central-1.amazonaws.com/trump.jpeg", class: "showpic" %>
 </div>
 
 <div class="col-md-11 centercontainer">
 <div class="row">
+  <!-- Box Right -->
+  <div class="col-md-4">
+  <div class="shadowcontainer">
+    <p class="text-center"> <%= User.pledged.pledged.count %> people have pledged
+        <h3 class="text-center"> <%= number_to_currency(User.pledged.sum(&:pledge)) %> </h3>
+  <br>
+    <div class="marq">
+  <marquee onmouseover="this.stop();" onmouseout="this.start();">
+             <div class="marquee">
+               <% User.pledged.each do |user| %>
+               <%= image_tag avatar_path(user), height: 30, width: 30, class: "marqueeavatar" %>&nbsp
+               <a><%= user.first_name %></a>&nbsp
+               <a>$<%= user.pledge %></a>&nbsp&nbsp&nbsp&nbsp&nbsp
+               <% end %>
+            </div>
+   </marquee>
+  </div>
+  <br>
+
+  <% if current_user && current_user.pledge.blank? %>
+  <h3 class="text-center">Hey <%= current_user.first_name %>, thank you for verifying
+    your email! Please fill in your pledge amount for partial ownership
+    in the Trump debt.</h3>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+      <%= devise_error_messages! %>
+
+    <!-- <div class="row"> -->
+      <div class="form-group">
+        <%= f.text_field :pledge, autofocus: false, class: 'form-control', placeholder:
+        "Pledge amount here." %>
+      </div>
+
+      <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+        <div class="alert alert-warning">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+      <% end %>
+
+
+      <div class="form-group">
+        <%= f.submit "Submit Pledge", class: 'btn btn-sm btn-block btn-primary' %>
+      </div>
+    <% end %>
+
+  <% else %>
+
+  <% if current_user && current_user.confirmed_at? %>
+
+  <h3 class="text-center">Hey <%= current_user.first_name %>, thank you for verifying
+    your email!</h3>
+
+  <% if current_user && current_user.comments? %>
+  <br><h4>Thank you for leaving a comment!</h4>
+  <p> Please also consider making a donation to help us keep this project going.  Thanks!
+      <%= render 'shared/buttons' %>
+      <p class="text-center"><%= number_to_currency(@charges.sum(:amount)) %> in generous donations so far.</p>
+
+    <br>
+
+  <% else %>
+
+  <p>Please leave a comment and consider making a donation.
+  Your input is very valuable.  Donations will be used
+  to maintain this site, which is badly needed since higher traffic means higher costs.</p>
+
+  <% end %>
+
+
+  <p>Email verified as <strong><%= current_user.email %></strong>.
+  <%= link_to "Not you or use a different email?", destroy_user_session_path,
+  method: :delete, :class => 'navbar-link'  %></p>
+
+  <% else %>
+  <%= render :template => 'devise/registrations/new'  %>
+  <p class="text-center"><%= number_to_currency(@charges.sum(:amount)) %> in generous donations so far.</p>
+
+  <% end %>
+
+
+  <% if current_user && current_user.pledge? && current_user.comments.blank? %>
+  <%= render :template => 'devise/registrations/edit'  %>
+  <% else %>
+  <% if current_user && current_user.confirmed_at.blank? %>
+    <%= render :template => 'devise/registrations/new'  %>
+
+  <% end %>
+  <% end %>
+  <% end %>
+  </div>
+  </div>
+
+
 <div class="col-md-8">
 <div class="shadowcontainer">
-<h4 class="text-center">In addition to squeezing the Trump family and taking advantage
+<h4 class="text-left">In addition to squeezing the Trump family and taking advantage
   of every legal option avialable to torment them, another goal is to eventually take over
-  one of the properties like the hotel in Washington, DC and we can turn it into a 2021
-  Insurrection Memorial. </h4>
+  one of the properties like the hotel in Washington, DC and we can turn the lobby into a 2021
+  Insurrection Memorial and operate the hotel as a self-supporting socially responsible business. </h4>
 <hr>
-<div class="row">
-<div class="col-sm-12">
+
+<div class="row col-sm-12">
+<div class="col">
+<%= image_tag "https://trumpdebt.s3.ca-central-1.amazonaws.com/certificate.png", class: "fit-image" %>
   <p>This is only a pledge to commit.  When we get to a critical amount pledged
-  I will send you an email asking you to confirm your pledge.
-</div>
-<div class="col-sm-6">
+  I will send you an email asking you to complete your pledge.
+
   <p> If you do complete
   that pledge, it's not a donation, you will become part owner of the debt and whetever property
   we foreclose!  We will hire the meanest lawyer to, within the limits
   of the law, harrass and torment the Trump family.
+
+  <p> Please consider making a pledge.  The Deutsche debt is estimated
+  at $340 million.  Sounds like a lot, but 81 million patriots voted against the criminal,
+  so we can get there with less than five bucks each!
+
+  Word on the street is Deutsche is <%= link_to "https://www.forbes.com/sites/jonathanponciano/2020/11/03/deutsche-bank-eager-to-dump-340-million-in-loans-to-trump-businesses-after-election/?sh=791d8aef23c0", target: "_blank" do %>
+    chomping at the bit to dump Trump<% end %>, just like
+    we did, so the debt will clearly be offered at a discount at some point in the future.
+    In the meantime, the plan is to (legally, of course) harrass, bully, and torment the
+    Trumps with the best lawyers and debt collectors money can buy.
 </div>
-<div class="col-sm-6">
-    <p> Please consider making a pledge.  The Deutsche debt is estimated
-    at $340 million.  Sounds like a lot, but 81 million patriots voted against the criminal,
-    so we can get there with less than five bucks each!
 </div>
+<div class="col-sm-12">
+
 </div>
-<hr>
-<div class="row">
+<div class="row col-sm-12">
 <div class="col-sm-4">
 <h4> I came up with this idea, posted it to Twitter, and here are a few of the responses.
 </div>
@@ -97,105 +196,31 @@
 <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner" style="width:100%; height: 100px !important;">
     <div class="carousel-item active">
-      <img class="d-block w-100" src="/assets/tweet1.png" alt="First slide">
+      <img class="d-block w-100" src="https://trumpdebt.s3.ca-central-1.amazonaws.com/tweet1.png" alt="First slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="/assets/tweet2.png" alt="Second slide">
+      <img class="d-block w-100" src="https://trumpdebt.s3.ca-central-1.amazonaws.com/tweet2.png" alt="Second slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="/assets/tweet3.png" alt="Third slide">
+      <img class="d-block w-100" src="https://trumpdebt.s3.ca-central-1.amazonaws.com/tweet3.png" alt="Third slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="/assets/tweet4.png" alt="Fourth slide">
+      <img class="d-block w-100" src="https://trumpdebt.s3.ca-central-1.amazonaws.com/tweet4.png" alt="Fourth slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="/assets/tweet5.png" alt="Fourth slide">
+      <img class="d-block w-100" src="https://trumpdebt.s3.ca-central-1.amazonaws.com/tweet5.png" alt="Fifth slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="https://trumpdebt.s3.ca-central-1.amazonaws.com/tweet6.png" alt="Sixth slide">
     </div>
   </div>
 </div>
 </div>
 </div>
 </div>
-</div>
-
-<!-- Box Right -->
-<div class="col-md-4">
-<div class="shadowcontainer">
-  <p class="text-center"> <%= @users.pledged.pledged.count %> people have pledged
-    <%= number_to_currency(@users.pledged.sum(&:pledge)) %> so far.</p>
-  <div class="marq">
-<marquee onmouseover="this.stop();" onmouseout="this.start();">
-           <div class="marquee">
-             <% @users.pledged.each do |user| %>
-             <%= image_tag avatar_path(user), height: 30, width: 30, class: "marqueeavatar" %>&nbsp
-             <a><%= user.first_name %></a>&nbsp
-             <a>$<%= user.pledge %></a>&nbsp&nbsp&nbsp&nbsp&nbsp
-             <% end %>
-          </div>
- </marquee>
-</div>
-<br>
-
-<% if current_user && current_user.pledge.blank? %>
-<h3 class="text-center">Hey <%= current_user.first_name %>, thank you for verifying
-  your email! Please fill in your pledge amount for partial ownership
-  in the Trump debt.</h3>
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-    <%= devise_error_messages! %>
-
-  <!-- <div class="row"> -->
-    <div class="form-group">
-      <%= f.text_field :pledge, autofocus: false, class: 'form-control', placeholder:
-      "Pledge amount here." %>
-    </div>
-
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div class="alert alert-warning">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
+</div></div>
 
 
-    <div class="form-group">
-      <%= f.submit "Submit Pledge", class: 'btn btn-sm btn-block btn-primary' %>
-    </div>
-  <% end %>
-
-<% else %>
-
-<% if current_user && current_user.confirmed_at? %>
-
-<h3 class="text-center">Hey <%= current_user.first_name %>, thank you for verifying
-  your email!</h3>
-
-<% if current_user && current_user.comments? %>
-<br><h4>Thank you for leaving a comment!</h4>
-
-<% else %>
-
-<p>Please leave a comment and consider making a donation.
-Your input is very valuable.  Donations will be used
-to maintain this site, which is badly needed since higher traffic means higher costs.</p>
-
-<% end %>
-
-<br>
-<p>Email verified as <strong><%= current_user.email %></strong>.
-<%= link_to "Not you or use a different email?", destroy_user_session_path,
-method: :delete, :class => 'navbar-link'  %></p>
-
-<% else %>
-<%= render :template => 'devise/registrations/new'  %>
-<% end %>
-
-<% if current_user && current_user.pledge? && current_user.comments.blank? %>
-<%= render :template => 'devise/registrations/edit'  %>
-<% else %>
-<% if current_user && current_user.confirmed_at.blank? %>
-  <%= render :template => 'devise/registrations/new'  %>
-<% end %>
-<% end %>
-<% end %>
-</div>
-</div>
 </div>
 
 
@@ -203,7 +228,8 @@ method: :delete, :class => 'navbar-link'  %></p>
 <!-- Comments -->
 
 <br>
-<div class="col-md-7">
+<div class="col-md-11 centercontainer">
+  <div class="shadowcontainer">
   <h3>Comments from Pledgers:</h3>
   <br>
   <% @users.withcomments.each do |user| %>
@@ -217,8 +243,4 @@ method: :delete, :class => 'navbar-link'  %></p>
 <br><br>
 </div>
 <br><br>
-<div class="col-md-7">
-<%= link_to "Report: Deutsche Bank ‘Eager’ To Dump $340 Million In Loans To Trump Businesses After Election, Forbes", "https://www.forbes.com/sites/jonathanponciano/2020/11/03/deutsche-bank-eager-to-dump-340-million-in-loans-to-trump-businesses-after-election/?sh=791d8aef23c0", target: "_blank" %>
-</div>
-
 </div>

@@ -1,0 +1,15 @@
+
+<div class="row">
+
+      <% Donation.all.each do |donation| %>
+        <%= content_tag :tr, id: dom_id(donation), class: dom_class(donation) do %>
+
+    <%= button_to donation.amount, checkout_create_path, method: :post, params: { id: donation.id },
+                            remote: true, class: "button" %>
+
+
+
+        <% end %>
+      <% end %>
+
+</div>

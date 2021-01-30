@@ -36,5 +36,4 @@ class User < ApplicationRecord
   scope :pledged, -> { where.not(pledge: nil) }
   scope :totalpledged, -> { where.not(pledge: nil) }
 
-
 end

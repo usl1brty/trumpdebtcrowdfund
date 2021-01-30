@@ -1,0 +1,67 @@
+
+
+
+<div class="row">
+  <div class="col-sm-6">
+    <h1>Politicians</h1>
+  </div>
+
+  <div class="col-sm-6 text-right">
+  <%= link_to new_politician_path, class: 'btn btn-primary' do %>
+    Add New Politician
+  <% end %>
+  </div>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+
+
+            <th>Last name</th>
+            <th>First name</th>
+            <th>Middle name</th>
+            <th>Nickname</th>
+            <th>Full name</th>
+            <th>Birthday</th>
+            <th>Chamber</th>
+            <th>State</th>
+            <th>Party</th>
+            <th>Url</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Contact form</th>
+
+          <th></th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @politicians.each do |politician| %>
+        <%= content_tag :tr, id: dom_id(politician), class: dom_class(politician) do %>
+
+
+                      <td><%= politician.last_name %></td>
+                      <td><%= politician.first_name %></td>
+                      <td><%= politician.middle_name %></td>
+                      <td><%= politician.nickname %></td>
+                      <td><%= politician.full_name %></td>
+                      <td><%= politician.birthday %></td>
+                      <td><%= politician.chamber %></td>
+                      <td><%= politician.state %></td>
+                      <td><%= politician.party %></td>
+                      <td><%= politician.url %></td>
+                      <td><%= politician.address %></td>
+                      <td><%= politician.phone %></td>
+                      <td><%= politician.contact_form %></td>
+
+
+            <td><%= link_to 'Show', politician %></td>
+
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

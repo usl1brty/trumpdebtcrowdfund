@@ -1,0 +1,17 @@
+
+<div class="d-flex justify-content-center">
+  <div class="row">
+
+      <% Donation.all.each do |donation| %>
+        <%= content_tag :tr, id: dom_id(donation), class: dom_class(donation) do %>
+
+
+    <%= button_to checkout_create_path, method: :post, params: { id: donation.id },
+            remote: true do %>
+            <div id="button">$<%= donation.amount %></div>
+        <% end %>
+        <% end %>
+      <% end %>
+
+</div>
+</div>

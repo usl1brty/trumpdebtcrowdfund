@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_14_045525) do
+ActiveRecord::Schema.define(version: 2021_01_28_040257) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(version: 2021_01_14_045525) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "donations", force: :cascade do |t|
+    t.string "name"
+    t.integer "amount"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -65,6 +72,24 @@ ActiveRecord::Schema.define(version: 2021_01_14_045525) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient_type_and_recipient_id"
+  end
+
+  create_table "politicians", force: :cascade do |t|
+    t.string "last_name"
+    t.string "first_name"
+    t.string "middle_name"
+    t.string "nickname"
+    t.string "full_name"
+    t.string "birthday"
+    t.string "state"
+    t.string "party"
+    t.string "url"
+    t.string "address"
+    t.string "phone"
+    t.string "contact_form"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "chamber"
   end
 
   create_table "services", force: :cascade do |t|

@@ -1,8 +1,9 @@
 <% if current_user %>
-
 <div class="hero-image">
   <div class="hero-text">
     <h4>Thank you for your support <%= current_user.first_name %>!</h4>
+    <p class="text-center"><%= number_to_currency(Charge.sum(:amount)) %> in generous donations so far.</p>
+
     <p>The people of this country are about to torment the Trumps
       the best way possible:  through their money!</p>
     <p>We'll email you when we're ready to complete pledges.</p>
@@ -10,30 +11,32 @@
     <a href="http://twitter.com/share?text=Torment%20Trump,%20join%20me%20#trumpdebt%20&url=http:localhost:3000">
       <i class="fab fa-twitter"> #trumpdebtcrowdfund</i></a>
 <br><br>
-
     <h5 class="text-center"> <%= @users.pledged.pledged.count %> people have pledged
       <%= number_to_currency(@users.pledged.sum(&:pledge)) %> so far.</h5>
-    <div class="hero-marq">
+
+  <div class="d-flex justify-content-center">
+    <div class="col-md-3">
+  <div class="hero-marq">
   <marquee onmouseover="this.stop();" onmouseout="this.start();">
              <div class="marquee">
                <% @users.pledged.each do |user| %>
-               <%= image_tag avatar_path(user), height: 30, width: 30, class: "marqueeavatar" %>&nbsp
                <a><%= user.first_name %></a>&nbsp
                <a>$<%= user.pledge %></a>&nbsp&nbsp&nbsp&nbsp&nbsp
               <% end %>
             </div>
    </marquee>
   </div>
+</div></div>
 
-   <p>Email verified as <strong><%= current_user.email %></strong>.
+   <p>Your email verified as <strong><%= current_user.email %></strong>.
    <%= link_to "Not you or use a different email?", destroy_user_session_path,
    method: :delete, :class => 'navbar-link'  %></p>
 
 
 </div></div>
 
-
-<div class="col-md-11 centercontainer">
+<div class="col-md-12"
+<div class="col-md-10 shadowcontainer">
 <!-- Comments -->
 <br>
 <div class="col-md-12"><br>
@@ -56,10 +59,43 @@
   <% end %>
 </div>
 <br><br>
-</div>
+</div></div>
 
 <% else %>
 
-Please find us at the home page.
+<div class="hero-image">
+  <div class="col-md-12 hero-text">
+    <h4>Thank you for your support!</h4>
+    <p>The people of this country are about to torment the Trumps
+      the best way possible:  through their money!</p>
+      <h2>How much would you like to pledge?</h2>
+  <br>
+  <%= render :template => 'devise/registrations/pledge'  %>
+    <a href="http://twitter.com/share?text=Torment%20Trump,%20join%20me%20#trumpdebt%20&url=http:localhost:3000">
+      <i class="fab fa-twitter"> #trumpdebtcrowdfund</i></a>
+<br><br><br><br>
+
+</div></div>
+
+
+<div class="col-md-11 centercontainer">
+<!-- Comments -->
+<br>
+<div class="col-md-12"><br>
+
+  <h3>Reasons for Pledging:</h3>
+  <br>
+
+
+  <% @users.withcomments.each do |user| %>
+  <%= image_tag avatar_path(user), height: 70, width: 70, class: "roundavatar" %>&nbsp&nbsp
+  <%= user.first_name %>
+  <br><br>
+  <p><%= user.comments %></p>
+<hr>
+  <% end %>
+</div>
+<br><br>
 
 <% end %>
+</div>

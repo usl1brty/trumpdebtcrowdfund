@@ -1,0 +1,11 @@
+<h3>Reasons for Pledging:</h3>
+<br>
+
+<% @users.withcomments.each do |user| %>
+<%= image_tag avatar_path(user), height: 70, width: 70, class: "roundavatar" %>&nbsp&nbsp
+<%= user.first_name %>
+<br><br>
+<p><%= user.comments %></p>
+<hr>
+<% end %>
+<br><br>

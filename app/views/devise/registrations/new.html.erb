@@ -13,24 +13,18 @@
       <div class="form-group">
         <%= f.text_field :name, autofocus: false, class: 'form-control', :required => true, placeholder: "First and Last Name" %>
       </div>
-
       <div class="form-group">
         <%= f.email_field :email, autofocus: false, class: 'form-control', placeholder: "Email Address" %>
       </div>
-
-
-
       <div class="form-group">
-        <%= f.submit "Click to Authenticate and Check Your Email", class: "btn btn-primary
+        <%= f.submit "Click to Authenticate then Check Your Email", class: "btn btn-primary
         btn-block btn-sm" %>
       </div>
       <%= render 'shared/notices' %>
-
-      <p>We will never share your email.</p>
-
+      <p>We will never share your email. <hr> <p> Please also consider a donation to support this site.</p>
     <% end %>
 
-    <div class="text-center">
-    </div>
+      <%= render 'shared/buttons' %>
+
   </div>
 </div>

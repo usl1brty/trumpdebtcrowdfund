@@ -20,5 +20,9 @@
         <%= f.submit "Submit Comment", class: 'btn btn-sm btn-block btn-primary' %>
       </div>
     <% end %>
-  </div>
+    <p> Please also consider a donation to support this site.</p>
+      <%= render 'shared/buttons' %>
+      <p class="text-center"><%= number_to_currency(Charge.sum(:amount)) %> in generous donations so far.</p>
+
+    </div>
 </div>
